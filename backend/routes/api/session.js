@@ -4,6 +4,20 @@ const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const router = express.Router();
 
+// Restore session user
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject()
+      });
+    } else return res.json({});
+  }
+);
+
 // Log in
 router.post(
   '/',
@@ -31,7 +45,7 @@ router.post(
 router.delete(
   '/',
   (_req, res) => {
-    res.clearCookie('XSRF-TOKEN');
+    res.clearCookie('token');
     return res.json({ message: 'success' });
   }
 );
