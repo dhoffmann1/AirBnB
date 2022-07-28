@@ -1,9 +1,13 @@
 // backend/routes/api/index.js
 const router = require('express').Router();
+const sessionRouter = require('./session.js');
+const usersRouter = require('./users.js');
 const { restoreUser, setTokenCookie, requireAuth } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
-router.use(restoreUser);
 
+router.use(restoreUser);
+router.use('/session', sessionRouter);
+router.use('/users', usersRouter);
 
 // // GET /api/restore-user
 // router.get(
