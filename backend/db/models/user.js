@@ -45,7 +45,10 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static associate(models) {
-      // define association here
+      User.hasMany( models.Spot, { foreignKey: 'ownerId'} )
+      User.hasMany( models.Booking, { foreignKey: 'userId'} )
+      User.hasMany( models.Image, { foreignKey: 'userId'} )
+      User.hasMany( models.Review, { foreignKey: 'userId'} )
     }
   };
 
@@ -65,6 +68,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 30]
         }
       },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 256],
+          isEmail: true
+        }
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -75,14 +86,6 @@ module.exports = (sequelize, DataTypes) => {
               throw new Error("Cannot be an email.");
             }
           }
-        }
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 256],
-          isEmail: true
         }
       },
       hashedPassword: {
