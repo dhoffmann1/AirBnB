@@ -1,24 +1,64 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Images', [
+      {
+        url: 'URLaddress1',
+        previewImage: true,
+        spotId: 1,
+        reviewId:  null,
+        userId: 1
+      },
+      {
+        url: 'URLaddress2',
+        previewImage: false,
+        spotId: 1,
+        reviewId:  null,
+        userId: 1
+      },
+      {
+        url: 'URLaddress3',
+        previewImage: false,
+        spotId: 1,
+        reviewId:  1,
+        userId: 2
+      },
+      {
+        url: 'URLaddress4',
+        previewImage: true,
+        spotId: 2,
+        reviewId:  null,
+        userId: 2
+      },
+      {
+        url: 'URLaddress5',
+        previewImage: false,
+        spotId: 2,
+        reviewId:  null,
+        userId: 2
+      },
+      {
+        url: 'URLaddress6',
+        previewImage: true,
+        spotId: 3,
+        reviewId:  null,
+        userId: 3
+      },
+      {
+        url: 'URLaddress7',
+        previewImage: false,
+        spotId: 3,
+        reviewId:  null,
+        userId: 3
+      }
+    ], {});
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+  down: async (queryInterface, Sequelize) => {
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete('Images', {
+      spotId: { [Op.in]: [1, 2, 3] }
+    }, {});
   }
 };
