@@ -51,6 +51,13 @@ module.exports = {
         spotId: 3,
         reviewId:  null,
         userId: 3
+      },
+      {
+        url: 'URLaddress8',
+        previewImage: true,
+        spotId: 4,
+        reviewId:  null,
+        userId: 3
       }
     ], {});
   },

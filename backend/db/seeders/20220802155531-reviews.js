@@ -27,6 +27,12 @@ module.exports = {
         userId:  1,
         spotId:  3
       },
+      {
+        review: 'great location near disney as well',
+        stars: 5,
+        userId:  1,
+        spotId:  4
+      }
     ], {});
   },
 

@@ -38,7 +38,19 @@ module.exports = {
         name: 'La Riviera Unit 22',
         description: 'Beautiful 4/2 home just 15 minutes away from Disney',
         price: 215
-      }
+      },
+      {
+        ownerId: 3,
+        address: '247 Mickey Way',
+        city: 'Orlando',
+        state: 'FL',
+        country: 'USA',
+        lat: 28.54,
+        lng: 81.38,
+        name: 'La Riviera Unit 23',
+        description: 'Beautiful 3/2 home just 15 minutes away from Disney',
+        price: 195
+      },
     ], {});
   },
 

@@ -38,6 +38,12 @@ module.exports = {
         userId: 1,
         startDate:  '2022-06-15 07:00:00',
         endDate:  '2022-06-30 15:00:00'
+      },
+      {
+        spotId: 4,
+        userId: 1,
+        startDate:  '2022-07-01 07:00:00',
+        endDate:  '2022-07-15 15:00:00'
       }
     ], {});
   },
