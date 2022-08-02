@@ -16,7 +16,7 @@ module.exports = {
         price: 125
       },
       {
-        ownerId: 1,
+        ownerId: 2,
         address: '12 Washington Ave',
         city: 'Austin',
         state: 'TX',
@@ -28,7 +28,7 @@ module.exports = {
         price: 185
       },
       {
-        ownerId: 2,
+        ownerId: 3,
         address: '247 Mickey Way',
         city: 'Orlando',
         state: 'FL',
