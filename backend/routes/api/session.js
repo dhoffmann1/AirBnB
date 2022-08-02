@@ -24,9 +24,7 @@ router.get(
   (req, res) => {
     const { user } = req;
     if (user) {
-      return res.json({
-        user: user.toSafeObject()
-      });
+      return res.json( user.toSafeObject());
     } else return res.json({});
   }
 );
@@ -38,7 +36,7 @@ router.post(
   async (req, res, next) => {
     const { credential, password } = req.body;
 
-    const user = await User.login({ credential, password });
+    let user = await User.login({ credential, password });
 
     if (!user) {
       const err = new Error('Login failed');
@@ -48,11 +46,14 @@ router.post(
       return next(err);
     }
 
-    await setTokenCookie(res, user);
+    let token = await setTokenCookie(res, user);
 
-    return res.json({
+    user = user.toJSON();
+    user.token = token;
+
+    return res.json(
       user
-    });
+    );
   }
 );
 
