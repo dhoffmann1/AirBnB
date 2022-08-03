@@ -197,5 +197,21 @@ router.put('/:spotId', restoreUser, async (req, res) => {
   }
 })
 
+// Delete a Spot
+router.delete('/:spotId', restoreUser, async (req, res) => {
+  const { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    if (spot.dataValues.ownerId === user.id) {
+      await spot.destroy();
+      res.json({ message: 'Successfully Deleted', statusCode: 200 })
+    } else {
+      res.json('You do not have permission to delete this spot.')
+    }
+  } else {
+    res.json({ message:"Spot couldn't be found" })
+  }
+})
+
 
 module.exports = router;
