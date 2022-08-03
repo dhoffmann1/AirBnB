@@ -95,8 +95,107 @@ router.get('/:spotId', async (req, res) => {
 });
 
 // Create a Spot
+router.post('/', restoreUser, async (req, res) => {
+  const { user } = req
+  const {
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  } = req.body;
 
+  const newSpot = {
+    ownerId: user.id,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  };
 
+  let result = await Spot.create(newSpot);
+
+  if (result) {
+    res.json(result)
+  } else {
+    res.json('could not create new spot')
+  }
+
+})
+
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', restoreUser, async (req, res) => {
+  const { url } = req.body;
+  const { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    if (spot.dataValues.ownerId === user.id) {
+      let newImage = await Image.create({
+        url,
+        spotId: spot.dataValues.id,
+        userId: user.id
+      });
+
+      let response = {
+        id: newImage.id,
+        imageableId: newImage.spotId,
+        url: newImage.url
+      }
+      res.json(response)
+    } else {
+      res.json('You do not have permission to post images on this spot.')
+    }
+  } else {
+      res.json({ message:"Spot couldn't be found" })
+  }
+})
+
+// Edit a Spot
+router.put('/:spotId', restoreUser, async (req, res) => {
+  const { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    if (spot.dataValues.ownerId === user.id) {
+      const {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      } = req.body;
+
+      spot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      })
+      res.json(spot)
+    } else {
+      res.json('You do not have permission to update this spot.')
+    }
+  } else {
+    res.json({ message:"Spot couldn't be found" })
+  }
+})
 
 
 module.exports = router;
