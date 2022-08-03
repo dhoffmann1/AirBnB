@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
     spot.dataValues.previewImage = previewImage !== null ? previewImage.toJSON().url : null;
   }
 
-  if (Spots) {
+  if (Spots.length) {
     res.json({ Spots })
   } else {
     res.json('no spots in database')
@@ -56,7 +56,7 @@ router.get('/current', restoreUser, async (req, res) => {
     spot.dataValues.previewImage = previewImage !== null ? previewImage.toJSON().url : null;
   }
 
-  if (Spots) {
+  if (Spots.length) {
     res.json({ Spots })
   } else {
     res.json('user has no spots')
@@ -71,7 +71,7 @@ router.get('/:spotId', async (req, res) => {
     attributes: [ [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ] ],
     where: { spotId: req.params.spotId }
   })
-    .then(res => res.toJSON())
+    .then(res => res.toJSON())  // { avgRating: 4.5 }
     .then(res2 => res2.avgRating);
   const Images = await Image.findAll({
     attributes: ['id', ['spotId', 'imageableId'], 'url'],
@@ -213,5 +213,44 @@ router.delete('/:spotId', restoreUser, async (req, res) => {
   }
 })
 
+
+// Get all Reviews from a Spot's ID (Lazy Load)
+router.get('/:spotId/reviews', async (req, res) => {
+  let Reviews = await Review.findAll({
+    attributes: ['id', 'userId', 'spotId', 'review', 'stars', 'createdAt', 'updatedAt'],
+    include: [
+      { model: User, attributes: ['id', 'firstName', 'lastName'] },
+      { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] }
+   ],
+    group: ['Review.id'],
+    where: { spotId: req.params.spotId }
+  });
+
+  if (Reviews.length) {
+    res.json({ Reviews })
+  } else {
+    res.json("Spot couldn't be found")
+  }
+});
+
+// Create a Review for a Spot based on the Spot's ID
+router.post('/:spotId/reviews', restoreUser, async (req, res) => {
+  let { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    const { review, stars } = req.body;
+
+    let newReview = await Review.create({
+      review,
+      stars,
+      userId: user.id,
+      spotId: spot.id
+    })
+
+    res.json(newReview)
+  } else {
+    res.json({ message:"Spot couldn't be found" })
+  }
+});
 
 module.exports = router;
