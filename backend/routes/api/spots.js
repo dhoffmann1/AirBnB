@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   });
 
   for (let spot of Spots) {
-    let previewImage = await Image.findOne({
+    let previewImage = await Image.findOne({  // If it has a preview = { url: 'example.com' } OR no PImg = null
       attributes: ['url'],
       where: {
         previewImage: true,
@@ -136,13 +136,14 @@ router.post('/', restoreUser, async (req, res) => {
 
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', restoreUser, async (req, res) => {
-  const { url } = req.body;
+  const { url, previewImage } = req.body;
   const { user } = req;
   let spot = await Spot.findByPk(req.params.spotId)
   if (spot) {
     if (spot.dataValues.ownerId === user.id) {
       let newImage = await Image.create({
         url,
+        previewImage,
         spotId: spot.dataValues.id,
         userId: user.id
       });

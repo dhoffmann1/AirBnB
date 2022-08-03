@@ -31,13 +31,14 @@ router.get('/current', restoreUser, async (req, res) => {
 
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', restoreUser, async (req, res) => {
-  const { url } = req.body;
+  const { url, previewImage } = req.body;
   const { user } = req;
   let review = await Review.findByPk(req.params.reviewId)
   if (review) {
     if (review.dataValues.userId === user.id) {
       let newImage = await Image.create({
         url,
+        previewImage,
         reviewId: review.dataValues.id,
         userId: user.id
       });
