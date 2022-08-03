@@ -20,7 +20,7 @@ module.exports = {
       {
         url: 'URLaddress3',
         previewImage: false,
-        spotId: 1,
+        spotId: null,
         reviewId:  1,
         userId: 2
       },
@@ -58,7 +58,14 @@ module.exports = {
         spotId: 4,
         reviewId:  null,
         userId: 3
-      }
+      },
+      {
+        url: 'URLaddress9',
+        previewImage: true,
+        spotId: null,
+        reviewId: 3,
+        userId: 1
+      },
     ], {});
   },
 
