@@ -9,14 +9,39 @@ const router = express.Router();
 
 // Get All Spots
 router.get('/', async (req, res) => {
+  let { page, size } = req.query;
+
+  if (!page) page = 1;
+  if (!size) size = 20;
+
+  page = parseInt(page);
+  size = parseInt(size);
+
+  const pagination = {};
+
+  if (page >= 1 && size >= 1) {
+      pagination.limit = size;
+      pagination.offset = size * (page - 1);
+  }
+
   let Spots = await Spot.findAll({
-    include: [ { model: Review, attributes: [] } ],
-    attributes: { include: [[ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]]},
-    group: ['Spot.id'],
-    raw: true
+    // include: [ { model: Review, attributes: [] } ],
+    // attributes: { include: [[ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]]},
+    // group: ['Spot.id'],
+    raw: true,
+    ...pagination
   });
 
   for (let spot of Spots) {
+
+    let avgRating = await Review.findOne({
+      attributes: [ [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ] ],
+      where: { spotId: spot.id },
+      raw: true
+    })
+      // .then(res => res.toJSON())  // { avgRating: 4.5 }
+      .then(res2 => res2.avgRating);
+
     let previewImage = await Image.findOne({  // If it has a preview = { url: 'example.com' } OR no PImg = null
       attributes: ['url'],
       where: {
@@ -26,11 +51,12 @@ router.get('/', async (req, res) => {
       raw: true
     })
 
+    spot.avgRating = avgRating;
     spot.previewImage = previewImage !== null ? previewImage.url : null;
   }
 
   if (Spots.length) {
-    res.json({ Spots })
+    res.json({ Spots, page, size })
   } else {
     res.json('no spots in database')
   }
@@ -43,7 +69,8 @@ router.get('/current', restoreUser, async (req, res) => {
     include: [ { model: Review, attributes: [] } ],
     attributes: { include: [[ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]]},
     group: ['Spot.id'],
-    where: { ownerId: user.id }
+    where: { ownerId: user.id },
+    raw: true
   });
 
   for (let spot of Spots) {
@@ -55,7 +82,7 @@ router.get('/current', restoreUser, async (req, res) => {
       }
     })
 
-    spot.dataValues.previewImage = previewImage !== null ? previewImage.toJSON().url : null;
+    spot.previewImage = previewImage !== null ? previewImage.url : null;
   }
 
   if (Spots.length) {
@@ -71,9 +98,10 @@ router.get('/:spotId', async (req, res) => {
   const numReviews = await Review.count({ where: { spotId: req.params.spotId } });
   const avgStarRating = await Review.findOne({
     attributes: [ [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ] ],
-    where: { spotId: req.params.spotId }
+    where: { spotId: req.params.spotId },
+    raw: true
   })
-    .then(res => res.toJSON())  // { avgRating: 4.5 }
+    // .then(res => res.toJSON())  // { avgRating: 4.5 }
     .then(res2 => res2.avgRating);
   const Images = await Image.findAll({
     attributes: ['id', ['spotId', 'imageableId'], 'url'],
