@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Images', [
       {
         url: 'URLaddress1',
-        previewImage: true,
+        previewImage: false,
         spotId: 1,
         reviewId:  null,
         userId: 1
@@ -65,7 +65,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Images', {
-      spotId: { [Op.in]: [1, 2, 3] }
+      spotId: { [Op.in]: [1, 2, 3, 4] }
     }, {});
   }
 };
