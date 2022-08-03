@@ -79,9 +79,10 @@ router.put('/:bookingId', restoreUser, async (req, res) => {
 // Delete a Booking
 router.delete('/:bookingId', restoreUser, async (req, res) => {
   const { user } = req;
-  let booking = await Booking.findByPk(req.params.bookingId)
+  let booking = await Booking.findByPk(req.params.bookingId);
+  let spot = await Spot.findOne({ where: { id: booking.spotId }, raw: true })
   if (booking) {
-    if (booking.dataValues.userId === user.id) {
+    if (booking.dataValues.userId === user.id || spot.ownerId === user.id) {
       await booking.destroy();
       res.json({ message: 'Successfully Deleted', statusCode: 200 })
     } else {
