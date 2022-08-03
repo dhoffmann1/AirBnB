@@ -90,7 +90,7 @@ router.delete('/:reviewId', restoreUser, async (req, res) => {
       await review.destroy();
       res.json({ message: 'Successfully Deleted', statusCode: 200 })
     } else {
-      res.json('You do not have permission to delete this spot.')
+      res.json('You do not have permission to delete this review.')
     }
   } else {
     res.json({ message:"Review couldn't be found", statusCode: 404 })

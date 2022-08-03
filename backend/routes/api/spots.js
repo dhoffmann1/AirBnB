@@ -253,4 +253,80 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
   }
 });
 
+// Get all Bookings for a Spot based on the Spot's ID (Lazy Load)
+router.get('/:spotId/bookings', restoreUser, async (req, res) => {
+  const { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    let Bookings = await Booking.findAll({ where: { spotId: spot.id }, raw: true });
+    let response = [];
+
+    if (spot.dataValues.ownerId === user.id) {
+      for (let booking of Bookings) {
+        let user = await User.findOne({
+          attributes: { include: ['id', 'firstName', 'lastName'] },
+          where: { id: booking.userId },
+          raw: true
+        })
+
+        const { id, spotId, userId, startDate, endDate, createdAt, updatedAt } = booking;
+
+        response.push({
+          User: user,
+          id,
+          spotId,
+          userId,
+          startDate,
+          endDate,
+          createdAt,
+          updatedAt
+        })
+      }
+    } else {
+      for (let booking of Bookings) {
+
+        const { id, spotId, userId, startDate, endDate, createdAt, updatedAt } = booking;
+
+        response.push({
+          spotId,
+          startDate,
+          endDate
+        })
+      }
+    }
+
+
+    if (response.length) {
+      res.json({ Bookings: response })
+    } else {
+      res.json("No bookings for this spot")
+    }
+
+  } else {
+      res.json({ message:"Spot couldn't be found" })
+  }
+});
+
+// Create a Booking for a Spot based on the Spot's ID
+router.post('/:spotId/bookings', restoreUser, async (req, res) => {
+  let { user } = req;
+  let spot = await Spot.findByPk(req.params.spotId)
+  if (spot) {
+    const { startDate, endDate } = req.body;
+
+    let newBooking = await Booking.create({
+      spotId: spot.id,
+      userId: user.id,
+      startDate,
+      endDate
+    })
+
+    res.json(newBooking)
+  } else {
+    res.json({ message:"Spot couldn't be found", statusCode: 404 })
+  }
+});
+
+
+
 module.exports = router;
