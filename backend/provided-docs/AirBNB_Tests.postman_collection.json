@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5f7fb173-a3ed-47ee-bc70-e030cb4f6230",
+		"_postman_id": "e11d2f66-ec4b-41f3-9ddc-9b1c04153c11",
 		"name": "AirBNB_Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15617080"
@@ -236,13 +236,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/users/current",
+					"raw": "{{url}}/session",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
-						"users",
-						"current"
+						"session"
 					]
 				}
 			},
@@ -320,7 +319,8 @@
 					"script": {
 						"exec": [
 							"const responseJson = pm.response.json();",
-							"postman.setEnvironmentVariable('spotId', responseJson.id)"
+							"postman.setEnvironmentVariable('spotId', responseJson.id)",
+							"postman.setEnvironmentVariable('spotIdForBooking', responseJson.id - 1)"
 						],
 						"type": "text/javascript"
 					}
@@ -390,7 +390,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"url\": \"image.url\"\n}",
+					"raw": "{\n  \"url\": \"image.url\",\n  \"previewImage\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -864,8 +864,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"const responseJson = pm.response.json();",
-							"postman.setEnvironmentVariable('reviewId', responseJson.id)"
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -937,7 +936,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"url\": \"image.url\"\n}",
+					"raw": "{\n  \"url\": \"image.url\",\n  \"previewImage\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1331,13 +1330,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/spots/{{spotId}}/bookings",
+					"raw": "{{url}}/spots/{{spotIdForBooking}}/bookings",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"spots",
-						"{{spotId}}",
+						"{{spotIdForBooking}}",
 						"bookings"
 					]
 				}
@@ -1385,13 +1384,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/spots/{{spotId}}/bookings",
+					"raw": "{{url}}/spots/{{spotIdForBooking}}/bookings",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"spots",
-						"{{spotId}}",
+						"{{spotIdForBooking}}",
 						"bookings"
 					]
 				}

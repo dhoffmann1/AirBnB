@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
   let Spots = await Spot.findAll({
     include: [ { model: Review, attributes: [] } ],
     attributes: { include: [[ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]]},
-    group: ['Spot.id']
+    group: ['Spot.id'],
+    raw: true
   });
 
   for (let spot of Spots) {
@@ -21,10 +22,11 @@ router.get('/', async (req, res) => {
       where: {
         previewImage: true,
         spotId: spot.id
-      }
+      },
+      raw: true
     })
 
-    spot.dataValues.previewImage = previewImage !== null ? previewImage.toJSON().url : null;
+    spot.previewImage = previewImage !== null ? previewImage.url : null;
   }
 
   if (Spots.length) {
