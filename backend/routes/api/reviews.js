@@ -1,4 +1,4 @@
-// backend/routes/api/users.js
+// backend/routes/api/reviews.js
 const express = require('express');
 const { Op } = require('sequelize');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
