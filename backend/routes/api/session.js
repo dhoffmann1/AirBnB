@@ -17,54 +17,42 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-// Restore session user
-router.get(
-  '/',
-  restoreUser,
-  (req, res) => {
-    const { user } = req;
-    if (user) {
-      return res.json( user.toSafeObject());
-    } else return res.json({});
-  }
-);
+// Restore session user (Get the Current User)
+router.get('/', restoreUser, (req, res) => {
+  const { user } = req;
+  if (user) return res.json(user.toSafeObject());
+  else return res.status(401).json({ message: "Authentication required", statusCode: 401 })
+});
 
 // Log in
-router.post(
-  '/',
-  validateLogin,
-  async (req, res, next) => {
-    const { credential, password } = req.body;
+router.post('/', validateLogin, async (req, res, next) => {
+  const { credential, password } = req.body;
 
-    let user = await User.login({ credential, password });
+  let user = await User.login({ credential, password });
 
-    if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ['The provided credentials were invalid.'];
-      return next(err);
-    }
-
-    let token = await setTokenCookie(res, user);
-
-    user = user.toJSON();
-    user.token = token;
-
-    return res.json(
-      user
-    );
+  if (!user) {
+    const err = new Error('Login failed');
+    err.status = 401;
+    err.title = 'Login failed';
+    err.errors = ['The provided credentials were invalid.'];
+    return next(err);
   }
-);
+
+  let token = await setTokenCookie(res, user);
+
+  user = user.toJSON();
+  user.token = token;
+
+  return res.json(
+    user
+  );
+});
 
 // Logout
-router.delete(
-  '/',
-  (_req, res) => {
-    res.clearCookie('token');
-    return res.json({ message: 'success' });
-  }
-);
+router.delete('/', (_req, res) => {
+  res.clearCookie('token');
+  return res.json({ message: 'success' });
+});
 
 
 module.exports = router;
