@@ -10,16 +10,13 @@ const router = express.Router();
 router.delete('/:imageId', restoreUser, async (req, res) => {
   const { user } = req;
   let image = await Image.findByPk(req.params.imageId);
-  if (image) {
-    if (image.dataValues.userId === user.id) {
-      await image.destroy();
-      res.json({ message: 'Successfully Deleted', statusCode: 200 })
-    } else {
-      res.json({ message: 'You do not have permission to delete this image.' })
-    }
-  } else {
-    res.json({ message:"Image couldn't be found", statusCode: 404 })
-  }
+
+  if (!user) return res.status(401).json({ message: "Authentication required", statusCode: 401 });
+  if (!image) return res.status(404).json({ message:"Image couldn't be found", statusCode: 404 });
+  if (image.dataValues.userId !== user.id) return res.status(403).json({ message: 'You do not have permission to delete this image.', statusCode: 403 });
+
+  await image.destroy();
+  res.json({ message: 'Successfully Deleted', statusCode: 200 })
 })
 
 
