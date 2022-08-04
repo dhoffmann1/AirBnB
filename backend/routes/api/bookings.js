@@ -73,8 +73,9 @@ router.put('/:bookingId', restoreUser, async (req, res) => {
     let bookingStartDate = parseInt(booking_.startDate.slice(0, 11).split('-').join(''));
     let bookingEndDate = parseInt(booking_.endDate.slice(0, 11).split('-').join(''));
 
+    // Must also check that the booking conflict is not the current booking being editted
     for (let i = bookingStartDate; i <= bookingEndDate; i++) {
-      if (startDateNum === i || endDateNum === i) {
+      if ((startDateNum === i || endDateNum === i) && booking_.id !== req.params.bookingId) {
         return res.status(403).json({
           message: "Sorry, this spot is already booked for the specified dates",
           statusCode: 403,
@@ -94,7 +95,7 @@ router.put('/:bookingId', restoreUser, async (req, res) => {
     endDate
   })
 
-  res.json(booking)
+  res.status(200).json(booking)
 });
 
 // Delete a Booking
@@ -110,7 +111,7 @@ router.delete('/:bookingId', restoreUser, async (req, res) => {
   if (booking.dataValues.userId !== user.id && spot.ownerId !== user.id) return res.status(403).json({ message: 'You do not have permission to delete this booking.', statusCode: 403 })
 
   await booking.destroy();
-  res.json({ message: 'Successfully Deleted', statusCode: 200 })
+  res.status(200).json({ message: 'Successfully Deleted', statusCode: 200 })
 })
 
 

@@ -27,7 +27,7 @@ router.get('/current', restoreUser, async (req, res) => {
 
   if (!Reviews.length) return res.status(404).json({ message:"Current user has no reviews", statusCode: 404 });
 
-  res.json({ Reviews })
+  res.status(200).json({ Reviews })
 });
 
 // Add an Image to a Review based on the Review's id
@@ -56,7 +56,7 @@ router.post('/:reviewId/images', restoreUser, async (req, res) => {
     url: newImage.url
   }
 
-  res.json(response)
+  res.status(200).json(response)
 })
 
 

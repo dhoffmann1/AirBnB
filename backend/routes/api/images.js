@@ -16,7 +16,7 @@ router.delete('/:imageId', restoreUser, async (req, res) => {
   if (image.dataValues.userId !== user.id) return res.status(403).json({ message: 'You do not have permission to delete this image.', statusCode: 403 });
 
   await image.destroy();
-  res.json({ message: 'Successfully Deleted', statusCode: 200 })
+  res.status(200).json({ message: 'Successfully Deleted', statusCode: 200 })
 })
 
 

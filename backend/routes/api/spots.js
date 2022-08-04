@@ -11,7 +11,6 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   let { page, size } = req.query;
 
-
   if (!page) page = 1;
   if (!size) size = 20;
 
@@ -124,7 +123,7 @@ router.get('/:spotId', async (req, res) => {
   spot.Images = Images;
   spot.Owner = Owner;
 
-  return res.json(spot)
+  return res.status(200).json(spot)
 });
 
 // Create a Spot
@@ -185,7 +184,7 @@ router.post('/:spotId/images', restoreUser, async (req, res) => {
     imageableId: newImage.spotId,
     url: newImage.url
   }
-  res.json(response)
+  res.status(200).json(response)
 })
 
 // Edit a Spot
@@ -221,7 +220,7 @@ router.put('/:spotId', restoreUser, async (req, res) => {
     price
   })
 
-  res.json(spot)
+  res.status(200).json(spot)
 })
 
 // Delete a Spot
@@ -235,11 +234,10 @@ router.delete('/:spotId', restoreUser, async (req, res) => {
 
 
   await spot.destroy();
-  res.json({ message: 'Successfully Deleted', statusCode: 200 })
+  res.status(200).json({ message: 'Successfully Deleted', statusCode: 200 })
 })
 
-
-// Get all Reviews from a Spot's ID (Lazy Load)
+// Get all Reviews by a Spot's ID (Lazy Load)
 router.get('/:spotId/reviews', async (req, res) => {
   let spot = await Spot.findOne({ where: {id: req.params.spotId}, raw: true });
 
@@ -256,7 +254,7 @@ router.get('/:spotId/reviews', async (req, res) => {
   if (!spot) return res.status(404).json({ message:"Spot couldn't be found", statusCode: 404 });
   if (!Reviews.length) return res.status(404).json({ message:"There are no reviews for this spot", statusCode: 404 });
 
-  res.json({ Reviews })
+  res.status(200).json({ Reviews })
 });
 
 // Create a Review for a Spot based on the Spot's ID
@@ -278,7 +276,7 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
     spotId: spot.id
   })
 
-  res.json(newReview)
+  res.status(201).json(newReview)
 });
 
 // Get all Bookings for a Spot based on the Spot's ID (Lazy Load)
@@ -369,7 +367,7 @@ router.post('/:spotId/bookings', restoreUser, async (req, res) => {
     endDate
   })
 
-  res.json(newBooking)
+  res.status(201).json(newBooking)
 });
 
 
