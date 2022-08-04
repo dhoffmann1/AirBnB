@@ -21,7 +21,6 @@ router.get('/current', restoreUser, async (req, res) => {
       { model: Spot, attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'] },
       { model: Image, attributes: ['id', ['reviewId', 'imageableId'], 'url'] },
    ],
-    group: ['Review.id'],
     where: { userId: user.id }
   });
 
