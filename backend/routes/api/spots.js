@@ -65,6 +65,8 @@ router.get('/', async (req, res) => {
 // Get All Spots belonging to Current User
 router.get('/current', restoreUser, async (req, res) => {
   let { user } = req;
+  if (!user) return res.status(401).json({ message: "Authentication required", statusCode: 401 })
+
   let Spots = await Spot.findAll({
     include: [ { model: Review, attributes: [] } ],
     attributes: { include: [[ sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating' ]]},
@@ -94,7 +96,10 @@ router.get('/current', restoreUser, async (req, res) => {
 
 // Get Details of a Spot from an ID (Lazy Load)
 router.get('/:spotId', async (req, res) => {
-  let spot = await Spot.findByPk(req.params.spotId).then(res => res.toJSON());
+  let spot = await Spot.findByPk(req.params.spotId);
+  if (!spot) return res.status(404).json({ message: "Spot couldn't be found", statusCode: 404 })
+  spot = spot.toJSON();
+
   const numReviews = await Review.count({ where: { spotId: req.params.spotId } });
   const avgStarRating = await Review.findOne({
     attributes: [ [ sequelize.fn('AVG', sequelize.col('stars')), 'avgRating' ] ],
@@ -117,16 +122,13 @@ router.get('/:spotId', async (req, res) => {
   spot.Images = Images;
   spot.Owner = Owner;
 
-  if (spot) {
-    res.json(spot)
-  } else {
-    res.json('spot does not exist')
-  }
+  return res.json(spot)
 });
 
 // Create a Spot
 router.post('/', restoreUser, async (req, res) => {
   const { user } = req
+  if (!user) return res.status(401).json({ message: "Authentication required", statusCode: 401 })
   const {
     address,
     city,
@@ -155,7 +157,7 @@ router.post('/', restoreUser, async (req, res) => {
   let result = await Spot.create(newSpot);
 
   if (result) {
-    res.json(result)
+    res.status(201).json(result)
   } else {
     res.json('could not create new spot')
   }
