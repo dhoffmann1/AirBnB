@@ -340,6 +340,12 @@ router.post('/:spotId/bookings', restoreUser, async (req, res) => {
 
   // Check that new booking does not interfere with current bookings for spot
   for (let booking of Bookings) {
+    console.log("typeof startDate", typeof startDate);
+    console.log("startDate", startDate);
+    console.log("typeof booking.endDate", typeof booking.endDate);
+    console.log("booking.endDate", booking.endDate);
+    console.log("startDate <= booking.endDate && endDate >= booking.startDate", startDate <= booking.endDate && endDate >= booking.startDate)
+
     if (startDate <= booking.endDate && endDate >= booking.startDate) {
       return res.status(403).json({
         message: "Sorry, this spot is already booked for the specified dates",
