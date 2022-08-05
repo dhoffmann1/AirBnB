@@ -33,7 +33,7 @@ router.get('/current', restoreUser, async (req, res) => {
 router.post('/:reviewId/images', restoreUser, async (req, res) => {
   const { url, previewImage } = req.body;
   const { user } = req;
-  let review = await Review.findOne({ where: {id: req.params.reviewId}, raw: true })
+  let review = await Review.findOne({ where: {id: req.params.reviewId}, raw: true });
   let reviewImages = await Image.findAll({ where: {reviewId: req.params.reviewId}, raw: true });
 
   if (!user) return res.status(401).json({ message: "Authentication required", statusCode: 401 });
@@ -53,10 +53,10 @@ router.post('/:reviewId/images', restoreUser, async (req, res) => {
     id: newImage.id,
     imageableId: newImage.reviewId,
     url: newImage.url
-  }
+  };
 
-  res.status(200).json(response)
-})
+  res.status(200).json(response);
+});
 
 
 // Edit a Review
@@ -75,9 +75,9 @@ router.put('/:reviewId', restoreUser, async (req, res) => {
     stars,
     userId: review_.dataValues.userId,
     spotId: review_.dataValues.spotId
-  })
+  });
 
-  res.status(200).json(review_)
+  res.status(200).json(review_);
 });
 
 // Delete a Review

@@ -22,7 +22,7 @@ router.get('/current', restoreUser, async (req, res) => {
       attributes: { exclude: ['description', 'createdAt', 'updatedAt'] },
       where: { id: booking.spotId },
       raw: true
-    })
+    });
 
 
     let previewImage = await Image.findOne({
@@ -32,7 +32,7 @@ router.get('/current', restoreUser, async (req, res) => {
         spotId: spot.id
       },
       raw: true
-    })
+    });
 
     spot.previewImage = previewImage !== null ? previewImage.url : null;
 
@@ -47,10 +47,10 @@ router.get('/current', restoreUser, async (req, res) => {
       endDate,
       createdAt,
       updatedAt
-    })
+    });
   }
 
-  res.status(200).json({ Bookings: response })
+  res.status(200).json({ Bookings: response });
 });
 
 // Edit a Booking
@@ -77,7 +77,7 @@ router.put('/:bookingId', restoreUser, async (req, res) => {
           startDate: "Start date conflicts with an existing booking",
           endDate: "End date conflicts with an existing booking"
         }
-      })
+      });
     }
   }
 
@@ -86,9 +86,9 @@ router.put('/:bookingId', restoreUser, async (req, res) => {
     userId: booking.userId,
     startDate,
     endDate
-  })
+  });
 
-  res.status(200).json(booking)
+  res.status(200).json(booking);
 });
 
 // Delete a Booking
@@ -99,12 +99,12 @@ router.delete('/:bookingId', restoreUser, async (req, res) => {
   if (!user) return res.status(401).json({ message: "Authentication required", statusCode: 401 });
   if (!booking) return res.status(404).json({ message:"Booking couldn't be found", statusCode: 404 });
   let spot = await Spot.findOne({ where: { id: booking.spotId }, raw: true });
-  if (booking.dataValues.userId !== user.id && spot.ownerId !== user.id) return res.status(403).json({ message: 'You do not have permission to delete this booking.', statusCode: 403 })
-  if (booking.dataValues.startDate <= new Date()) return res.status(403).json({ message: "Bookings that have been started can't be deleted", statusCode: 403 })
+  if (booking.dataValues.userId !== user.id && spot.ownerId !== user.id) return res.status(403).json({ message: 'You do not have permission to delete this booking.', statusCode: 403 });
+  if (booking.dataValues.startDate <= new Date()) return res.status(403).json({ message: "Bookings that have been started can't be deleted", statusCode: 403 });
 
 
   await booking.destroy();
-  res.status(200).json({ message: 'Successfully Deleted', statusCode: 200 })
+  res.status(200).json({ message: 'Successfully Deleted', statusCode: 200 });
 })
 
 
