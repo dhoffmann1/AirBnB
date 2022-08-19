@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import AirbnbLogo from './images/Airbnb_Logo.png'
+import customLogo from './images/custom-logo.png'
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -23,12 +25,16 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    <nav>
+      {/* <li> */}
+        {/* <NavLink exact to="/">Home</NavLink> */}
+        <NavLink exact to="/">
+          <img className="logo" src={customLogo} alt="airbnb-logo" />
+        </NavLink>
+
         {isLoaded && sessionLinks}
-      </li>
-    </ul>
+      {/* </li> */}
+    </nav>
   );
 }
 
