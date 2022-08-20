@@ -6,6 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import AirbnbLogo from './images/Airbnb_Logo.png'
 import customLogo from './images/custom-logo.png'
 import './Navigation.css';
+import MainNavMenu from './MainNavMenu';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -17,24 +18,19 @@ function Navigation({ isLoaded }){
     );
   } else {
     sessionLinks = (
-      <>
-        <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+      <MainNavMenu />
     );
   }
 
   return (
-    <nav>
-      {/* <li> */}
-        {/* <NavLink exact to="/">Home</NavLink> */}
+    <header>
+      <nav>
         <NavLink exact to="/">
-          <img className="logo" src={customLogo} alt="airbnb-logo" />
+          <img id="logo" src={customLogo} alt="airbnb-logo" />
         </NavLink>
-
         {isLoaded && sessionLinks}
-      {/* </li> */}
-    </nav>
+      </nav>
+    </header>
   );
 }
 
