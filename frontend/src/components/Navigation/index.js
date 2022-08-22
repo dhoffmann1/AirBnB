@@ -5,8 +5,8 @@ import ProfileButton from './ProfileButton';
 // import LoginFormModal from '../LoginFormModal';
 // import AirbnbLogo from './images/Airbnb_Logo.png';
 import customLogo from './images/custom-logo.png';
-import './Navigation.css';
 import MainNavMenu from './MainNavMenu';
+import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
