@@ -34,7 +34,7 @@ function MainNavMenu({ setShowSignupModal, setShowLoginModal }){
         </div>
       </button>
       {showMenu && (
-        <div id='login-signup-wrapper'>
+        <div id='login-logout-wrapper'>
           <div id='login-wrapper'>
             <div id='signup-button' onClick={() => setShowSignupModal(true)}>Signup</div>
             <div id='login-button' onClick={() => setShowLoginModal(true)}>Log In</div>
