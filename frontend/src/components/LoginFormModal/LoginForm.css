@@ -1,4 +1,4 @@
-form {
+#login-form {
   width: 400px;
   height: 340px;
   padding: 20px;
@@ -6,13 +6,13 @@ form {
   border: black solid 1px;
 }
 
-#welcome-title {
+#welcome-title-login {
   font-weight: 600;
   font-size: 24px;
   padding-left: 10px;
 }
 
-#form-input-fields-div {
+#form-input-fields-div-login {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -21,12 +21,14 @@ form {
   /* margin: 10px; */
 }
 
-.label-input-fields {
+.label-input-fields-login {
   width: 380px;
   height: 40px;
   border-radius: 10px;
   font-size: 16px;
-  margin: 5px
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 #login-buttons-div {
@@ -43,4 +45,5 @@ form {
   height: 40px;
   border-radius: 10px;
   font-size: 18px;
+  cursor: pointer;
 }

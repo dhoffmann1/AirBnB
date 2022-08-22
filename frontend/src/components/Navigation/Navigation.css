@@ -71,7 +71,7 @@ header > nav {
 #login-signup-wrapper {
   background-color: red;
   position: relative;
-  top: 60px;
+  top: 50px;
   right: 220px;
   width: 0;
   height: 0;
@@ -88,20 +88,24 @@ header > nav {
   background-color: white;
 
   font-family: sans-serif;
-  padding: 10px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   line-height: 30px;
 
 }
 
 #signup-button {
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
+  /* text-decoration: none; */
+  /* color: inherit; */
   font-weight: bold;
+  /* width: 200px; */
+  padding-left: 10px;
 }
 
 #login-button {
   cursor: pointer;
+  padding-left: 10px;
 }
 
 #login-button:hover, #signup-button:hover {

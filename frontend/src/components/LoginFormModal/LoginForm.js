@@ -21,15 +21,16 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form id='login-form' onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <div id='welcome-title'>Welcome to Airbnb-Prime</div>
+      <div id='welcome-title-login'>Welcome to Airbnb-Prime</div>
+      {/* <div style={{paddingLeft: '10px', paddingTop: '5px'}}>Login</div> */}
       <br />
-      <div id='form-input-fields-div'>
+      <div id='form-input-fields-div-login'>
         <label>
           {/* {'Username or Email '} */}
           <input
@@ -38,7 +39,7 @@ function LoginForm() {
             onChange={(e) => setCredential(e.target.value)}
             required
             placeholder="Username or Email"
-            className="label-input-fields"
+            className="label-input-fields-login"
           />
         </label>
         {/* <br /> */}
@@ -50,7 +51,7 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
             placeholder="Password"
-            className="label-input-fields"
+            className="label-input-fields-login"
           />
         </label>
       </div>
