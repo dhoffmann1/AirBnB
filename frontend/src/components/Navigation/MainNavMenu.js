@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormPage';
 
-function MainNavMenu({}){
+function MainNavMenu(){
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -18,7 +19,7 @@ function MainNavMenu({}){
       {showMenu && (
         <div id='login-signup-wrapper'>
           <div id="login-wrapper">
-            <NavLink id="signup-button" to="/signup">Sign up</NavLink>
+            <SignupFormModal />
             <LoginFormModal />
           </div>
         </div>

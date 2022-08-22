@@ -72,23 +72,25 @@ header > nav {
   background-color: red;
   position: relative;
   top: 60px;
-  right: 120px;
+  right: 220px;
   width: 0;
   height: 0;
 }
 
 #login-wrapper {
   width: 200px;
-  height: 40px;
+  height: 60px;
   display: flex;
   flex-flow: column;
   align-items: left;
   border: 1px lightgrey solid;
   border-radius: 15px;
   background-color: white;
-  font-family: sans-serif;
 
+  font-family: sans-serif;
   padding: 10px;
+  line-height: 30px;
+
 }
 
 #signup-button {
