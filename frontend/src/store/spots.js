@@ -35,7 +35,7 @@ export const getSpotById = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${id}`)
   if (response.ok) {
     const data = await response.json();
-    console.log('data from getSpotById thunk', data)
+    // console.log('data from getSpotById thunk', data)
     // console.log('data.Spots from thunk', data.Spots)
     dispatch(read(data));
     return response;
@@ -50,16 +50,17 @@ const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       newState = {...state}
-      console.log('state from inside reducer', state)
-      console.log('action.spots from inside reducer', action.spots)
+      // console.log('state from inside reducer', state)
+      // console.log('action.spots from inside reducer', action.spots)
       action.spots.forEach(spot => {
-        console.log('spot.id inside forEach loop', spot.id)
+        // console.log('spot.id inside forEach loop', spot.id)
         newState[spot.id] = spot;
       });
-      console.log('newState after forEach loop', newState)
+      // console.log('newState after forEach loop', newState)
       return newState;
     case READ:
       newState = {...state, spots: {...state.spots}}
+      newState = {...state, [action.spot.id]: {...action.spot}}
       return newState;
     default:
       return state;

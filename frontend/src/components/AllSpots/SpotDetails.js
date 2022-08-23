@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import PokemonItems from './PokemonItems';
-import EditSpotForm from './EditSpotForm';
+// import EditSpotForm from './EditSpotForm';
 // import ItemForm from './ItemForm';
 import { getSpotById } from '../../store/spots';
+import './SpotDetails.css'
 
 const SpotDetails = () => {
   const { spotId } = useParams();
-  const spot = useSelector(state => state.Spots[spotId]);
+  const spot = useSelector(state => state.spots[spotId]);
+  console.log('spot from SpotDetails component', spot);
+  const spotsImagesArray = spot.Images;
+  console.log(spotsImagesArray);
   // const [showEditPokeForm, setShowEditPokeForm] = useState(false);
   // const [editItemId, setEditItemId] = useState(null);
   const dispatch = useDispatch();
@@ -19,7 +23,7 @@ const SpotDetails = () => {
     dispatch(getSpotById(spotId))
   }, [dispatch, spotId]);
 
-  if (!spot) {
+  if (!spot || !spot.Images) {
     return null;
   }
 
@@ -91,21 +95,42 @@ const SpotDetails = () => {
   // }
 
   return (
-    <main id="spot-main">
-      <div className={`pokemon-detail-image-background`}>
-        <div
-          className="pokemon-detail-image"
-          style={{ backgroundImage: `url('${pokemon.imageUrl}')` }}
-        ></div>
-        <div>
-          <h1 className="bigger">{pokemon.name}</h1>
-          {(!showEditPokeForm && pokemon.captured) && (
-            <button onClick={() => setShowEditPokeForm(true)}>Edit</button>
-          )}
+    <main id='spot-main-container'>
+      <div id='spot-main-area'>
+        <div id='header-details-container'>
+          <div id='spot-name'>{spot.name}</div>
+          <div id='spot-sub-details'>
+            <div id='average-rating'><i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
+            <div id='count-reviews'>{spot.numReviews} reviews</div>
+            <div id='city-state-info'>{spot.city}, {spot.state}, {spot.country}</div>
+          </div>
         </div>
-
+        <div id='images-container'>
+          {spotsImagesArray.map(image => {
+            return (
+              <div id={`image${image.id}`}>
+                <img src={image.url} alt='images'/>
+              </div>
+            )
+          })}
+        </div>
+        <div id='host-container'>
+          <div id='host-name'>Spot hosted by {spot.Owner.firstName}</div>
+          <div id='host-image'></div>
+        </div>
+        <div id='description-container'>
+          <div id='description-info'>{spot.description}</div>
+        </div>
+        <div id='reviews-container'>
+          <div id='avg-ratings-and-reviews-container'>
+            <div id='average-rating2'><i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
+            <div id='count-reviews2'>{spot.numReviews} reviews</div>
+          </div>
+          <div id='reviews-component'>
+            
+          </div>
+        </div>
       </div>
-      {content}
     </main>
   );
 };
