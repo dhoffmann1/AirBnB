@@ -1,0 +1,163 @@
+#spot-main-container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#spot-main-area {
+  max-width: 1760px;
+  width: 80%;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 5fr 1fr 1.5fr 4fr;
+  grid-template-areas:
+    "header"
+    "images"
+    "host"
+    "description"
+    "reviews";
+  /* column-gap: 15px; */
+  /* row-gap: 20px; */
+  /* justify-items: center; */
+}
+
+
+#header-details-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: start;
+  /* align-items: center; */
+  flex-direction: column;
+  grid-area: header;
+  row-gap: 5px;
+}
+
+#header-details-container > #spot-name {
+  font-size: 2em;
+}
+
+#header-details-container > #spot-sub-details {
+  font-size: medium;
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+  /* max-width: 40%; */
+}
+
+#count-reviews, #city-state-info {
+  text-decoration: underline;
+}
+
+#images-container {
+  width: 100%;
+  /* width: 1000px; */
+  display: grid;
+  /* grid-template-columns: 250px 250px 250px 250px; */
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 250px 250px;
+  grid-template-areas:
+    "one one two three"
+    "one one four five";
+  grid-area: images;
+}
+
+.spot-details-images-containers {
+  width: 100%;
+}
+
+#image1 {
+  grid-area: one;
+}
+
+#image-img-1 {
+  border-radius: 15px 0px 0px 15px;
+}
+
+#image2 {
+  grid-area: two;
+}
+
+#image3 {
+  grid-area: three;
+}
+
+#image-img-3 {
+  border-radius: 0px 15px 0px 0px;
+}
+
+#image4 {
+  grid-area: four;
+}
+
+#image5 {
+  grid-area: five;
+}
+
+#image-img-5 {
+  border-radius: 0px 0px 15px 0px;
+}
+
+.spot-details-images {
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+#host-container {
+  padding-top: 30px;
+  /* font-weight: 600; */
+  font-size: x-large;
+  grid-area: host;
+  display: flex;
+  width: 330px;
+  justify-content: space-between;
+  border-bottom: lightgrey 1px solid;
+}
+
+#host-image-image {
+  font-size: xx-large;
+}
+
+#description-container {
+  padding-top: 30px;
+  /* border-bottom: lightgrey 1px solid; */
+  grid-area: description;
+  display: flex;
+  width: 330px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  font-size: large;
+
+}
+
+#reviews-container {
+  width: 100%;
+  padding-top: 30px;
+  border-bottom: lightgrey 1px solid;
+  border-top: lightgrey 1px solid;
+  grid-area: reviews;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 120px 1fr;
+  grid-template-areas:
+    "stars"
+    "bars"
+    "reviewComponent";
+
+}
+
+#avg-ratings-and-reviews-container {
+  font-size: x-large;
+  display: flex;
+  width: 330px;
+  /* height: 50px; */
+  justify-content: space-between;
+}

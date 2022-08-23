@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import reviewsBarImage from './images/review-bars.jpg'
 // import PokemonItems from './PokemonItems';
 // import EditSpotForm from './EditSpotForm';
 // import ItemForm from './ItemForm';
@@ -11,7 +12,7 @@ const SpotDetails = () => {
   const { spotId } = useParams();
   const spot = useSelector(state => state.spots[spotId]);
   console.log('spot from SpotDetails component', spot);
-  const spotsImagesArray = spot.Images;
+  const spotsImagesArray = spot?.Images;
   console.log(spotsImagesArray);
   // const [showEditPokeForm, setShowEditPokeForm] = useState(false);
   // const [editItemId, setEditItemId] = useState(null);
@@ -101,33 +102,38 @@ const SpotDetails = () => {
           <div id='spot-name'>{spot.name}</div>
           <div id='spot-sub-details'>
             <div id='average-rating'><i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
+            <div className='circle'>•</div>
             <div id='count-reviews'>{spot.numReviews} reviews</div>
+            <div className='circle'>•</div>
             <div id='city-state-info'>{spot.city}, {spot.state}, {spot.country}</div>
           </div>
         </div>
         <div id='images-container'>
-          {spotsImagesArray.map(image => {
+          {spotsImagesArray.map((image, index) => {
             return (
-              <div id={`image${image.id}`}>
-                <img src={image.url} alt='images'/>
+              <div id={`image${index+1}`} className='spot-details-images-containers'>
+                <img className='spot-details-images' id={`image-img-${index+1}`} src={image.url} alt='images'/>
               </div>
             )
           })}
         </div>
         <div id='host-container'>
           <div id='host-name'>Spot hosted by {spot.Owner.firstName}</div>
-          <div id='host-image'></div>
+          <div id='host-image'><i class="fa-solid fa-user-astronaut" id='host-image-image'></i></div>
         </div>
         <div id='description-container'>
+          {/* <div>Description: </div> */}
           <div id='description-info'>{spot.description}</div>
         </div>
         <div id='reviews-container'>
           <div id='avg-ratings-and-reviews-container'>
-            <div id='average-rating2'><i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
-            <div id='count-reviews2'>{spot.numReviews} reviews</div>
+            <div id='average-rating2'><i class="fa-solid fa-star" /> {spot.avgStarRating} • {spot.numReviews} reviews</div>
+          </div>
+          <div id=''>
+            <img src={reviewsBarImage} />
           </div>
           <div id='reviews-component'>
-            
+
           </div>
         </div>
       </div>
