@@ -18,12 +18,15 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <div id='greeting-message'>{`Hello, ${sessionUser.firstName} ${sessionUser.lastName}`}</div>
+        <div id='become-a-host'>Become a Host</div>
         <ProfileButton user={sessionUser} />
       </>
     );
   } else {
     sessionLinks = (
-      <MainNavMenu setShowLoginModal={setShowLoginModal} setShowSignupModal={setShowSignupModal}/>
+      <>
+        <MainNavMenu setShowLoginModal={setShowLoginModal} setShowSignupModal={setShowSignupModal}/>
+      </>
     );
   }
 
