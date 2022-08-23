@@ -2,30 +2,67 @@
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 #splash-area {
   max-width: 1760px;
   width: 80%;
   padding-left: 80px;
+  padding-right: 80px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  grid-template-areas:
+  /* grid-template-areas:
     "main main main main"
     "main main main main"
-    "main main main main";
+    "main main main main"; */
+  column-gap: 15px;
+  row-gap: 20px;
+  justify-items: center;
 }
 
 
-#navlink-containers {
-
+.navlink-containers {
+  width: 100%;
+  height: 100%;
+  /* padding: 15px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
-.spots-navLinks {
-
+.allspots-navLinks {
+  text-decoration: none;
+  color: black;
+  display: grid;
+  justify-self: center;
+  align-items: center;
+  padding: 5px;
 }
 
-.spot-images {
+/* .allspots-images-containers {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 95%;
+} */
 
+.allspots-images {
+  width: 100%;
+  height: 260px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
+
+.allspots-city-state-ratings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.allspots-name {
+  color: grey;
 }
