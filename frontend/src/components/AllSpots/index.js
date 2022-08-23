@@ -20,14 +20,14 @@ function AllSpots() {
   if (!allSpots) return null;
 
   return (
-    <main>
-      <div>
+    <main id='splash-container'>
+      <div id='splash-area'>
         {allSpots.map(spot => {
           return (
-            <div>
+            <div id='navlink-containers'>
               <NavLink className='spots-navLinks' key={spot.id} to={`/spots/${spot.id}`}>
                 <div>Spot Id #{spot.id}</div>
-                <div>Spot Preview Image: {spot.previewImage}</div>
+                <img className='spot-images' src={spot.previewImage} alt='preview-Image'></img>
                 <div>Spot City, State: {spot.city}, {spot.state}</div>
                 <div>Spot Name: {spot.name}</div>
                 <div>Spot Price: $<span style={{'fontWeight':'600'}}>{spot.price}</span>/night</div>

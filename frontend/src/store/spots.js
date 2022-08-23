@@ -23,6 +23,18 @@ export const getAllSpots = () => async (dispatch) => {
   }
 };
 
+// export const getAllSpots = () => async (dispatch) => {
+//   const resSpots = await csrfFetch('/api/spots');
+//   const resReviews =
+//   if (response.ok) {
+//     const data = await response.json();
+//     console.log('data from thunk', data)
+//     console.log('data.Spots from thunk', data.Spots)
+//     dispatch(load(data.Spots));
+//     return response;
+//   }
+// };
+
 // reducer
 const initialState = {};
 

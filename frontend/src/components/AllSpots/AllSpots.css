@@ -1,0 +1,31 @@
+#splash-container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#splash-area {
+  max-width: 1760px;
+  width: 80%;
+  padding-left: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "main main main main"
+    "main main main main"
+    "main main main main";
+}
+
+
+#navlink-containers {
+
+}
+
+.spots-navLinks {
+
+}
+
+.spot-images {
+
+}
