@@ -1,9 +1,19 @@
+#create-spot-form-container {
+  display: flex;
+  padding-right: 80px;
+  padding-left: 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
 #create-spot-form {
-  width: 400px;
-  height: 340px;
+  width: 600px;
+  height: 740px;
   padding: 20px;
   border-radius: 10px;
   border: black solid 1px;
+  justify-content: center;
 }
 
 #welcome-title-create-spot {
@@ -12,7 +22,7 @@
   padding-left: 10px;
 }
 
-#form-input-fields-div-login {
+#form-input-fields-div-create-spot {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -21,8 +31,8 @@
   /* margin: 10px; */
 }
 
-.label-input-fields-login {
-  width: 380px;
+.label-input-fields-create-spot {
+  width: 580px;
   height: 40px;
   border-radius: 10px;
   font-size: 16px;
@@ -31,14 +41,20 @@
   box-sizing: border-box;
 }
 
-#login-buttons-div {
+#create-spot-property-description-input-field {
+  min-width: 80px;
+  min-height: 150px;
+  resize: none;
+}
+
+#create-spot-buttons-div {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.login-submit-buttons {
+.create-spot-submit-buttons {
   background-color: rgb(255, 56, 92);
   color: white;
   width: 380px;

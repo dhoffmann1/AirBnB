@@ -46,14 +46,20 @@ router.get('/', async (req, res) => {
     })
       .then(res2 => res2.avgRating);
 
-    let previewImage = await Image.findOne({
-      attributes: ['url'],
+    let previewImages = await Image.findAll({
+      // attributes: ['url'],
       where: {
         previewImage: true,
         spotId: spot.id
       },
       raw: true
     });
+
+    let previewImage = null;
+    for (let image of previewImages) {
+      // console.log(image)
+      if (image.previewImage === true || image.previewImage === 1) previewImage = image
+    }
 
     spot.avgRating = avgRating;
     spot.previewImage = previewImage !== null ? previewImage.url : null;

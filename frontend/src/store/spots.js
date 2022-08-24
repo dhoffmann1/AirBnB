@@ -39,6 +39,13 @@ const read = spot => {
   }
 };
 
+const updateSpot = spot => {
+  return {
+    type: UPDATE,
+    spot
+  }
+}
+
 const deleteSpot = spotId => {
   return {
     type: DELETE,
@@ -79,8 +86,7 @@ export const createSpot = (spot) => async (dispatch) => {
   })
   if (response.ok) {
     const data = await response.json();
-    console.log('data from getSpotById thunk', data)
-    // console.log('data.Spots from thunk', data.Spots)
+    // console.log('data from createSpot thunk', data)
     dispatch(create(data));
     return data;
   }
@@ -96,11 +102,25 @@ export const addPreviewImage = (spotId, url) => async (dispatch) => {
     })
   })
   if (response.ok) {
-    const data = await response.json();
+    // const data = await response.json();
     // console.log('data from getSpotById thunk', data)
     // console.log('data.Spots from thunk', data.Spots)
     dispatch(createImage(spotId, url));
     return response;
+  }
+};
+
+export const updateSpotThunk = (spotId, spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(spot)
+  })
+  if (response.ok) {
+    const data = await response.json();
+    // console.log('data from createSpot thunk', data)
+    dispatch(updateSpot(data));
+    return data;
   }
 };
 
@@ -109,7 +129,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     method: "DELETE"
   })
   if (response.ok) {
-    const data = await response.json();
+    // const data = await response.json();
     dispatch(deleteSpot(spotId));
     return response;
   }
@@ -137,19 +157,22 @@ const spotsReducer = (state = initialState, action) => {
     case CREATE:
       newState = {
         ...state,
-        // ...state.spots,
         [action.spot.id]: {...action.spot}
       };
       return newState;
-    // case UPDATE:
-    //   return newState;
+    case UPDATE:
+      newState = {
+        ...state,
+        [action.spot.id]: {...action.spot}
+      }
+      return newState;
     case DELETE:
       newState = {...state};
-      console.log('action.spotId from spotsReducer', action.spotId)
+      // console.log('action.spotId from spotsReducer', action.spotId)
       delete newState[action.spotId];
       return newState;
     case CREATE_PREVIEW_IMAGE:
-      console.log('action.spotId', action.spotId);
+      // console.log('action.spotId', action.spotId);
       newState = {
         ...state,
         [action.spotId]: {
@@ -159,11 +182,10 @@ const spotsReducer = (state = initialState, action) => {
       };
 
 
-      console.log('action.spotId.previewImage', action.spotId.previewImage);
+      // console.log('action.spotId.previewImage', action.spotId.previewImage);
       console.log('state[action.spotId]', state[action.spotId]);
-
       console.log('action.url', action.url);
-      console.log('newState', newState)
+      // console.log('newState', newState)
       return newState
     default:
       return state;

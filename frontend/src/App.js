@@ -7,6 +7,7 @@ import AllSpots from "./components/AllSpots"
 import SpotDetails from "./components/AllSpots/SpotDetails";
 import CurrentUserSpots from "./components/AllSpots/CurrentUserSpots"
 import CreateSpotForm from "./components/AllSpots/CreateSpotForm"
+import EditSpotForm from "./components/AllSpots/EditSpotForm"
 
 function App() {
   const dispatch = useDispatch();
@@ -30,8 +31,14 @@ function App() {
           <Route exact path="/spots/create">
             <CreateSpotForm />
           </Route>
+          <Route exact path="/spots/:spotId/edit">
+            <EditSpotForm />
+          </Route>
           <Route path="/spots/:spotId">
             <SpotDetails />
+          </Route>
+          <Route>
+            <div>404 Page Not Found</div>
           </Route>
         </Switch>
       )}

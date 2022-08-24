@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import reviewsBarImage from './images/review-bars.jpg'
@@ -9,7 +9,7 @@ const SpotDetails = () => {
   const { spotId } = useParams();
   const spot = useSelector(state => state.spots[spotId]);
   // console.log('spot from SpotDetails component', spot);
-  const spotsImagesArray = spot?.Images;
+  let spotsImagesArray = spot?.Images;
   // console.log(spotsImagesArray);
 
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const SpotDetails = () => {
         <div id='header-details-container'>
           <div id='spot-name'>{spot.name}</div>
           <div id='spot-sub-details'>
-            <div id='average-rating'><i class="fa-solid fa-star" /> {spot.avgStarRating}</div>
+            <div id='average-rating'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)}</div>
             <div className='circle'>•</div>
             <div id='count-reviews'>{spot.numReviews} reviews</div>
             <div className='circle'>•</div>
@@ -38,7 +38,7 @@ const SpotDetails = () => {
         <div id='images-container'>
           {spotsImagesArray.map((image, index) => {
             return (
-              <div id={`image${index+1}`} className='spot-details-images-containers'>
+              <div id={`image${index+1}`} key={index} className='spot-details-images-containers'>
                 <img className='spot-details-images' id={`image-img-${index+1}`} src={image.url} alt='images'/>
               </div>
             )
@@ -56,7 +56,7 @@ const SpotDetails = () => {
             <div id='average-rating2'><i class="fa-solid fa-star" /> {spot.avgStarRating} • {spot.numReviews} reviews</div>
           </div>
           <div id=''>
-            <img src={reviewsBarImage} />
+            <img src={reviewsBarImage} alt='X'/>
           </div>
           <div id='reviews-component'>
 

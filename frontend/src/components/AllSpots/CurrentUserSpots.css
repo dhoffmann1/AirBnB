@@ -16,8 +16,9 @@
   align-items: center;
   font-size: x-large;
   padding: 20px;
-  background-color: brown;
+  background-image: linear-gradient(to right, rgb(255, 19, 70), rgb(200, 22, 105));
   color: white;
+  border-radius: 10px;
 }
 
 #create-spot-button {
