@@ -1,0 +1,80 @@
+#splash-container-current-user {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#title-banner-current-user {
+  height: 40px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  padding: 20px;
+  background-color: brown;
+  color: white;
+}
+
+#create-spot-button {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 10px;
+  font-size: large;
+  text-decoration: none;
+}
+
+#splash-area-current-user {
+  max-width: 1760px;
+  width: 80%;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 15px;
+  row-gap: 20px;
+  justify-items: center;
+}
+
+
+.navlink-containers {
+  width: 100%;
+  height: 100%;
+  /* padding: 15px; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.allspots-navLinks {
+  text-decoration: none;
+  color: black;
+  display: grid;
+  justify-self: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.allspots-images {
+  width: 100%;
+  height: 260px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
+
+.allspots-city-state-ratings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.allspots-name {
+  color: grey;
+}

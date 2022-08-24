@@ -18,7 +18,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <div id='greeting-message'>{`Hello, ${sessionUser.firstName} ${sessionUser.lastName}`}</div>
-        <div id='become-a-host'>Become a Host</div>
+        <NavLink exact to='/spots/current'><div id='become-a-host'>Become a Host</div></NavLink>
         <ProfileButton user={sessionUser} />
       </>
     );

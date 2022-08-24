@@ -24,8 +24,8 @@ function AllSpots() {
       <div id='splash-area'>
         {allSpots.map(spot => {
           return (
-            <div className='navlink-containers'>
-              <NavLink className='allspots-navLinks' key={spot.id} to={`/spots/${spot.id}`}>
+            <div className='navlink-containers' key={spot.id}>
+              <NavLink className='allspots-navLinks' to={`/spots/${spot.id}`}>
                 {/* <div>Spot Id #{spot.id}</div> */}
                 <div className='allspots-images-containers'>
                   <img className='allspots-images' src={spot.previewImage} alt='preview-Image'></img>

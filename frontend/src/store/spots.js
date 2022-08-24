@@ -2,22 +2,51 @@ import { csrfFetch } from './csrf';
 
 // types (CRUD)
 const LOAD = 'spots/getAllSpots';
-const READ = 'spots/readSpot'
+const CREATE = 'spots/createSpot';
+const READ = 'spots/readSpot';
+const UPDATE = 'spots/updateSpot';
+const DELETE = 'spots/deleteSpot';
+
+const CREATE_PREVIEW_IMAGE = 'images/createImage'
 
 // actions
 const load = spots => {
   return {
     type: LOAD,
-    spots,
+    spots
   };
 };
+
+const create = spot => {
+  return {
+    type: CREATE,
+    spot
+  }
+};
+
+const createImage = (spotId, url) => {
+  return {
+    type: CREATE_PREVIEW_IMAGE,
+    spotId,
+    url
+  }
+}
 
 const read = spot => {
   return {
     type: READ,
-    spot,
+    spot
+  }
+};
+
+const deleteSpot = spotId => {
+  return {
+    type: DELETE,
+    spotId
   }
 }
+
+
 
 // thunks
 export const getAllSpots = () => async (dispatch) => {
@@ -42,6 +71,50 @@ export const getSpotById = (id) => async (dispatch) => {
   }
 };
 
+export const createSpot = (spot) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(spot)
+  })
+  if (response.ok) {
+    const data = await response.json();
+    console.log('data from getSpotById thunk', data)
+    // console.log('data.Spots from thunk', data.Spots)
+    dispatch(create(data));
+    return data;
+  }
+};
+
+export const addPreviewImage = (spotId, url) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      url,
+      previewImage: true
+    })
+  })
+  if (response.ok) {
+    const data = await response.json();
+    // console.log('data from getSpotById thunk', data)
+    // console.log('data.Spots from thunk', data.Spots)
+    dispatch(createImage(spotId, url));
+    return response;
+  }
+};
+
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE"
+  })
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(deleteSpot(spotId));
+    return response;
+  }
+};
+
 // reducer
 const initialState = {};
 
@@ -59,9 +132,39 @@ const spotsReducer = (state = initialState, action) => {
       // console.log('newState after forEach loop', newState)
       return newState;
     case READ:
-      newState = {...state, spots: {...state.spots}}
-      newState = {...state, [action.spot.id]: {...action.spot}}
+      newState = {...state, [action.spot.id]: {...action.spot}};
       return newState;
+    case CREATE:
+      newState = {
+        ...state,
+        // ...state.spots,
+        [action.spot.id]: {...action.spot}
+      };
+      return newState;
+    // case UPDATE:
+    //   return newState;
+    case DELETE:
+      newState = {...state};
+      console.log('action.spotId from spotsReducer', action.spotId)
+      delete newState[action.spotId];
+      return newState;
+    case CREATE_PREVIEW_IMAGE:
+      console.log('action.spotId', action.spotId);
+      newState = {
+        ...state,
+        [action.spotId]: {
+          ...state[action.spotId],
+          previewImage: action.url
+        }
+      };
+
+
+      console.log('action.spotId.previewImage', action.spotId.previewImage);
+      console.log('state[action.spotId]', state[action.spotId]);
+
+      console.log('action.url', action.url);
+      console.log('newState', newState)
+      return newState
     default:
       return state;
   }
