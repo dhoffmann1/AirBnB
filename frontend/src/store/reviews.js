@@ -48,7 +48,7 @@ export const createReviewForSpotThunk = (spotId, review) => async (dispatch) => 
   if (response.ok) {
     const data = await response.json();
     dispatch(createReview(data));
-    return response;
+    return data;
   }
 };
 

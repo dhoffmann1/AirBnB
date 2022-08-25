@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import reviewsBarImage from './images/review-bars.jpg'
 import { getSpotById } from '../../store/spots';
 import ReviewsBySpotId from '../Reviews';
 import './SpotDetails.css'
@@ -12,12 +11,14 @@ const SpotDetails = () => {
   // console.log('spot from SpotDetails component', spot);
   let spotsImagesArray = spot?.Images;
   // console.log(spotsImagesArray);
+  let spotReviews = useSelector(state => state.reviews)
+  spotReviews = Object.values(spotReviews);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getSpotById(spotId))
-  }, [dispatch, spotId]);
+  }, [dispatch, spotId, spotReviews.length]);
 
   if (!spot || !spot.Images) {
     return null;
@@ -62,12 +63,12 @@ const SpotDetails = () => {
           <div id='description-info'>{spot.description}</div>
         </div>
         <div id='reviews-container'>
-          <div id='avg-ratings-and-reviews-container'>
+          {/* <div id='avg-ratings-and-reviews-container'>
             <div id='average-rating2'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)} • {spot.numReviews} reviews</div>
           </div>
           <div id=''>
             <img src={reviewsBarImage} alt='X'/>
-          </div>
+          </div> */}
           <div id='reviews-component'>
             <ReviewsBySpotId spot={spot}/>
           </div>

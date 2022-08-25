@@ -13,7 +13,7 @@
   padding-right: 80px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 5fr 1fr 1.5fr 4fr;
+  grid-template-rows: 100px 500px 120px 180px auto;
   grid-template-areas:
     "header"
     "images"
@@ -141,23 +141,24 @@
 #reviews-container {
   width: 100%;
   padding-top: 30px;
+  padding-bottom: 30px;
   border-bottom: lightgrey 1px solid;
   border-top: lightgrey 1px solid;
   grid-area: reviews;
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 40px 120px 1fr;
   grid-template-areas:
     "stars"
     "bars"
-    "reviewComponent";
+    "reviewComponent"; */
 
 }
 
-#avg-ratings-and-reviews-container {
+/* #avg-ratings-and-reviews-container {
   font-size: x-large;
   display: flex;
   width: 330px;
-  /* height: 50px; */
+  height: 50px;
   justify-content: space-between;
-}
+} */
