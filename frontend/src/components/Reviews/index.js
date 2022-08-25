@@ -59,73 +59,72 @@ function ReviewsBySpotId({ spot }) {
                   <div style={{ fontWeight: 'bold'}}>{review.User?.firstName} commented:</div>
                   <div>{review.review}</div>
                   {/* <div>{review.stars} stars</div> */}
-                  {user.id === review.userId &&
+                  {user?.id === review.userId &&
                     <div id='review-buttons-container'>
                       {/* <button id='edit-review-button'>Edit Comment</button> */}
                       <button id='delete-review-button' onClick={() => deleteReviewFunc(review.id)}>Delete Comment</button>
                     </div>
                   }
-                  {/* <br /> */}
                 </div>
               )
             })}
         </div>
       </div>
-      <div id='review-new-review-form-container'>
-        {!showReviewField && (
+      {!user &&
+        <div id='review-new-review-form-container'>
           <div id='review-reveal-form-button'>
-            <button className='new-review-buttons' onClick={() => setShowReviewField(true)}>Leave A Review</button>
+            <button className='new-review-buttons' onClick={() => alert('Please login to leave a review.')}>Leave A Review</button>
           </div>
-        )}
-        {showReviewField && (
-          <div>
-            <form id='reviews-form-new-with-errors-container' onSubmit={handleSubmit}>
-              <ul>
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-              ))}
-              </ul>
-              <div id='reviews-form'>
-                <input
-                  type="textarea"
-                  value={review}
-                  onChange={(e) => setReview(e.target.value)}
-                  required
-                  placeholder="Type your review here"
-                  id="review-text-area"
-                />
-                <div id='review-stars-div'>
-                  <div id='review-stars-div-text'>Select Star Rating 1-5</div>
-                  <select
-                    name='stars'
-                    id='review-stars-menu'
-                    form='reviews-form'
-                    onChange={(e) => setStars(e.target.value)}
-                    >
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                      <option value={3}>3</option>
-                      <option value={4}>4</option>
-                      <option value={5}>5</option>
-                  </select>
+        </div>}
+      {user &&
+        <div id='review-new-review-form-container'>
+          {!showReviewField && (
+            <div id='review-reveal-form-button'>
+              <button className='new-review-buttons' onClick={() => setShowReviewField(true)}>Leave A Review</button>
+            </div>
+          )}
+          {showReviewField && (
+            <div>
+              <form id='reviews-form-new-with-errors-container' onSubmit={handleSubmit}>
+                <ul>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+                </ul>
+                <div id='reviews-form'>
+                  <input
+                    type="textarea"
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    required
+                    placeholder="Type your review here"
+                    id="review-text-area"
+                  />
+                  <div id='review-stars-div'>
+                    <div id='review-stars-div-text'>Select Star Rating 1-5</div>
+                    <select
+                      name='stars'
+                      id='review-stars-menu'
+                      form='reviews-form'
+                      onChange={(e) => setStars(e.target.value)}
+                      >
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                    </select>
+                  </div>
+                  <div id='review-submit-cancel-buttons-container'>
+                    <input id='review-submit-button' type='submit' value='Submit Review'  className='new-review-buttons' />
+                    <button id='review-cancel-submission' className='new-review-buttons' onClick={() => setShowReviewField(false)}>Nevermind</button>
+                  </div>
                 </div>
-                {/* <input
-                  type="number"
-                  id="vol"
-                  name="vol"
-                  min='1'
-                  max='5'
-                  onChange={(e) => setStars(e.target.value)}
-                  /> */}
-                <div id='review-submit-cancel-buttons-container'>
-                  <input id='review-submit-button' type='submit' value='Submit Review'  className='new-review-buttons' />
-                  <button id='review-cancel-submission' className='new-review-buttons' onClick={() => setShowReviewField(false)}>Nevermind</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        )}
-      </div>
+              </form>
+            </div>
+          )}
+        </div>
+      }
     </main>
   );
 

@@ -11,7 +11,7 @@ function CreateSpotForm() {
   // console.log(spotId, typeof spotId)
   const currentSpot = useSelector(state => state.spots[spotId])
   // currentSpot = currentSpot[spotId];
-  console.log(currentSpot)
+  // console.log(currentSpot)
   const history = useHistory()
   const [address, setAddress] = useState(currentSpot.address);
   const [city, setCity] = useState(currentSpot.city);
@@ -30,7 +30,7 @@ function CreateSpotForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    let spot = { address, city, state, country, lat, lng, name, description, price };
+    let spot = { address, city, state, country, lat, lng, name, description, price: parseInt(price) };
     // if imageUrl does not end in .jpg, .jpeg, .png, .gif
     let allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
     if (!allowedImageExtensions.some(ext => imageUrl.slice(-5).toLowerCase().includes(ext))) {

@@ -16,7 +16,10 @@ function CurrentUserSpots() {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getAllSpots());
+    const timer = setTimeout(() => {
+      dispatch(getAllSpots());
+    }, 100);
+    return () => clearTimeout(timer);
   }, [dispatch])
 
   const deleteSpotFunc = (spotId) => {
