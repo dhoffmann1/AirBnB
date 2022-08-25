@@ -124,6 +124,23 @@ router.get('/:spotId', async (req, res) => {
     where: { id: spot.ownerId }
   });
 
+  let previewImages = await Image.findAll({
+    // attributes: ['url'],
+    where: {
+      previewImage: true,
+      spotId: spot.id
+    },
+    raw: true
+  });
+
+  let previewImage = null;
+  for (let image of previewImages) {
+    console.log(image)
+    if (image.previewImage === true || image.previewImage === 1) previewImage = image
+  }
+
+
+  spot.previewImage = previewImage !== null ? previewImage.url : null;
   spot.numReviews = numReviews;
   spot.avgStarRating = avgStarRating;
   spot.Images = Images;
