@@ -62,7 +62,7 @@ const SpotDetails = () => {
         </div>
         <div id='reviews-container'>
           <div id='avg-ratings-and-reviews-container'>
-            <div id='average-rating2'><i class="fa-solid fa-star" /> {spot.avgStarRating} • {spot.numReviews} reviews</div>
+            <div id='average-rating2'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)} • {spot.numReviews} reviews</div>
           </div>
           <div id=''>
             <img src={reviewsBarImage} alt='X'/>
