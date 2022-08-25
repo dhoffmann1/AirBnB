@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import reviewsBarImage from './images/review-bars.jpg'
 import { getSpotById } from '../../store/spots';
+import ReviewsBySpotId from '../Reviews';
 import './SpotDetails.css'
 
 const SpotDetails = () => {
@@ -68,7 +69,7 @@ const SpotDetails = () => {
             <img src={reviewsBarImage} alt='X'/>
           </div>
           <div id='reviews-component'>
-
+            <ReviewsBySpotId spot={spot}/>
           </div>
         </div>
       </div>

@@ -272,7 +272,7 @@ router.get('/:spotId/reviews', async (req, res) => {
   });
 
   if (!spot) return res.status(404).json({ message:"Spot couldn't be found", statusCode: 404 });
-  if (!Reviews.length) return res.status(404).json({ message:"There are no reviews for this spot", statusCode: 404 });
+  // if (!Reviews.length) return res.status(404).json({ message:"There are no reviews for this spot", statusCode: 404 });
 
   res.status(200).json({ Reviews });
 });
