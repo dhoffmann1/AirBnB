@@ -57,7 +57,6 @@ router.get('/', async (req, res) => {
 
     let previewImage = null;
     for (let image of previewImages) {
-      // console.log(image)
       if (image.previewImage === true || image.previewImage === 1) previewImage = image
     }
 
@@ -135,7 +134,6 @@ router.get('/:spotId', async (req, res) => {
 
   let previewImage = null;
   for (let image of previewImages) {
-    console.log(image)
     if (image.previewImage === true || image.previewImage === 1) previewImage = image
   }
 

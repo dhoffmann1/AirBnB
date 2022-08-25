@@ -22,6 +22,15 @@ const SpotDetails = () => {
     return null;
   }
 
+  let orderedImagesArray = [];
+  for (let image of spotsImagesArray) {
+    if (image.url === spot.previewImage) orderedImagesArray.push(image)
+  }
+  for (let image of spotsImagesArray) {
+    if (image.url !== spot.previewImage) orderedImagesArray.push(image)
+  }
+  // console.log(orderedImagesArray)
+
   return (
     <main id='spot-main-container'>
       <div id='spot-main-area'>
@@ -36,7 +45,7 @@ const SpotDetails = () => {
           </div>
         </div>
         <div id='images-container'>
-          {spotsImagesArray.map((image, index) => {
+          {orderedImagesArray.map((image, index) => {
             return (
               <div id={`image${index+1}`} key={index} className='spot-details-images-containers'>
                 <img className='spot-details-images' id={`image-img-${index+1}`} src={image.url} alt='images'/>
