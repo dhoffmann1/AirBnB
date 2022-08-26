@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
       <>
         <div id='greeting-message'>{`Hello, ${sessionUser.firstName} ${sessionUser.lastName}`}</div>
         <div id='become-a-host-and-dropdown-div'>
-          <NavLink id='become-a-host-navlink'exact to='/spots/current'><div id='become-a-host'>Become a Host</div></NavLink>
+          <NavLink id='become-a-host-navlink'exact to='/spots/current'><div id='become-a-host'>Switch to hosting</div></NavLink>
           <ProfileButton user={sessionUser} />
         </div>
       </>
