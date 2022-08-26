@@ -131,7 +131,7 @@ module.exports = {
         country: 'USA',
         lat: 22.54,
         lng: 151.38,
-        name: 'NOT A BORING HOUSE, THIS UNIT IS FUN !',
+        name: 'NOT A BORING HOUSE, THIS UNIT IS FUN!',
         description: 'Make some memories at this unique and family-friendly place.  YOU MUST BE 21+ FOR THIS RESERVATION',
         price: 69
       },
