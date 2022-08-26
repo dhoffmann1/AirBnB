@@ -1,7 +1,6 @@
 # Airbnb-Prime
 
 ## About
----
 
 [<font color=#FF385C>Airbnb-Prime</font>](https://airbnb-prime.herokuapp.com/) is a full-stack application clone of Airbnb deployed on Heroku.  The app uses React and Redux on the front-end and Express and Sequelize on the back-end.
 
@@ -13,7 +12,7 @@
 <br>
 
 ## Technologies Used
-----
+
 ### Front-end:
 * Javascript
 * React
@@ -31,7 +30,7 @@
 <br>
 
 ## Application Preview
----
+
 ### Splash Page:
 ![Splash-Page](./PreviewImages/splash-page.jpg)
 
@@ -48,7 +47,7 @@
 <br>
 
 ## How to Launch
----
+
 ### Heroku
 Feel free to explore the site on Heroku using this [Link](https://airbnb-prime.herokuapp.com/).
 
