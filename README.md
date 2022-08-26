@@ -53,4 +53,13 @@
 Feel free to explore the site on Heroku using this [Link](https://airbnb-prime.herokuapp.com/).
 
 ### Locally
-If you would like to launch the site locally do the following:
+If you would like to launch the site locally please do the following:
+
+1. Clone this repo using a terminal by going to a directory where you would like to download and typing `git clone https://github.com/Pepa90210/AirBnB.git`.
+* Alternatively, you may download the zip file and extract it to a folder on your computer.
+
+2. Go into the 'backend' directory and in the terminal type `npm start`.
+
+3. Open up a second terminal, go into the 'frontend' directory and in the terminal type `npm start`.  If you have Google Chrome, this should automatically launch the browser and direct you to `localhost:3000`.  If it did not launch automatically, manually open up a browser and go to `localhost:3000`.
+
+4. Congrats, you have launched the app.
