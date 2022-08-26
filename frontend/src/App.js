@@ -8,6 +8,7 @@ import SpotDetails from "./components/AllSpots/SpotDetails";
 import CurrentUserSpots from "./components/AllSpots/CurrentUserSpots"
 import CreateSpotForm from "./components/AllSpots/CreateSpotForm"
 import EditSpotForm from "./components/AllSpots/EditSpotForm"
+import Footer from "./components/Footer"
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <>
+    <div id="overall-app-wrapper">
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -42,6 +44,10 @@ function App() {
           </Route>
         </Switch>
       )}
+    </div>
+    <div id="app-footer-wrapper">
+      <Footer />
+    </div>
     </>
   );
 }

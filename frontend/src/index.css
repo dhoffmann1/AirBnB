@@ -1,4 +1,14 @@
 /* TODO Add site wide styles */
-body {
+html, body, #root {
   font-family: sans-serif;
+  margin: 0;
+  height: 100%;
+}
+
+#overall-app-wrapper {
+  min-height: calc(100vh - 40px);
+}
+
+#app-footer-wrapper {
+  height: 40px;
 }
