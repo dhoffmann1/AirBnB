@@ -12,7 +12,7 @@
   padding-left: 80px;
   padding-right: 80px;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 100%;
   grid-template-rows: 100px 500px 120px 180px auto;
   grid-template-areas:
     "header"
@@ -51,9 +51,9 @@
   /* max-width: 40%; */
 }
 
-#count-reviews, #city-state-info {
+/* #count-reviews, #city-state-info {
   text-decoration: underline;
-}
+} */
 
 #images-container {
   width: 100%;
@@ -139,7 +139,7 @@
 }
 
 #reviews-container {
-  width: 100%;
+  max-width: 100%;
   padding-top: 30px;
   padding-bottom: 30px;
   border-bottom: lightgrey 1px solid;

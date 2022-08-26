@@ -39,7 +39,9 @@ const SpotDetails = () => {
         <div id='header-details-container'>
           <div id='spot-name'>{spot.name}</div>
           <div id='spot-sub-details'>
-            <div id='average-rating'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)}</div>
+            {isNaN(Number.parseFloat(spot.avgStarRating).toFixed(2)) && <div id='average-rating'><i class="fa-solid fa-star" /></div>}
+            {!isNaN(Number.parseFloat(spot.avgStarRating).toFixed(2)) && <div id='average-rating'><i class="fa-solid fa-star" />{Number.parseFloat(spot.avgStarRating).toFixed(2)}</div>}
+            {/* <div id='average-rating'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)}</div> */}
             <div className='circle'>•</div>
             <div id='count-reviews'>{spot.numReviews} reviews</div>
             <div className='circle'>•</div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getReviewsBySpotIdThunk, createReviewForSpotThunk, deleteReviewThunk } from '../../store/reviews';
-import reviewsBarImage from './images/review-bars.jpg'
+// import reviewsBarImage from './images/review-bars.jpg'
 import './Reviews.css';
 
 
@@ -46,11 +46,13 @@ function ReviewsBySpotId({ spot }) {
   return (
     <main id='reviews-main-container'>
       <div id='avg-ratings-and-reviews-container'>
-        <div id='average-rating2'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)} • {spot.numReviews} reviews</div>
+        {isNaN(Number.parseFloat(spot.avgStarRating).toFixed(2)) && <div><i class="fa-solid fa-star" /> • {spot.numReviews} reviews</div>}
+        {!isNaN(Number.parseFloat(spot.avgStarRating).toFixed(2)) && <div><i class="fa-solid fa-star" />{Number.parseFloat(spot.avgStarRating).toFixed(2)} • {spot.numReviews} reviews</div>}
+        {/* <div id='average-rating2'><i class="fa-solid fa-star" /> {Number.parseFloat(spot.avgStarRating).toFixed(2)} • {spot.numReviews} reviews</div> */}
       </div>
-      <div id='reviewBarImage'>
+      {/* <div id='reviewBarImage'>
         <img src={reviewsBarImage} alt='X'/>
-      </div>
+      </div> */}
       <div id='reviews-list-container'>
         <div id='reviews-list'>
             {reviewsArray.map((review, index) => {

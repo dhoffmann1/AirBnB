@@ -11,7 +11,7 @@
 #footer-80px-padding {
   padding-left: 80px;
   padding-right: 80px;
-  height: 20px;
+  /* height: 20px; */
   align-items: center;
   display: flex;
   justify-content: space-between;

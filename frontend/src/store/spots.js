@@ -60,8 +60,6 @@ export const getAllSpots = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots');
   if (response.ok) {
     const data = await response.json();
-    // console.log('data from thunk', data)
-    // console.log('data.Spots from thunk', data.Spots)
     dispatch(load(data.Spots));
     return response;
   }
@@ -71,8 +69,6 @@ export const getSpotById = (id) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${id}`)
   if (response.ok) {
     const data = await response.json();
-    // console.log('data from getSpotById thunk', data)
-    // console.log('data.Spots from thunk', data.Spots)
     dispatch(read(data));
     return response;
   }
@@ -86,7 +82,6 @@ export const createSpot = (spot) => async (dispatch) => {
   })
   if (response.ok) {
     const data = await response.json();
-    // console.log('data from createSpot thunk', data)
     dispatch(create(data));
     return data;
   }
@@ -102,9 +97,6 @@ export const addPreviewImage = (spotId, url) => async (dispatch) => {
     })
   })
   if (response.ok) {
-    // const data = await response.json();
-    // console.log('data from getSpotById thunk', data)
-    // console.log('data.Spots from thunk', data.Spots)
     dispatch(createImage(spotId, url));
     return response;
   }
@@ -118,7 +110,6 @@ export const updateSpotThunk = (spotId, spot) => async (dispatch) => {
   })
   if (response.ok) {
     const data = await response.json();
-    // console.log('data from createSpot thunk', data)
     dispatch(updateSpot(data));
     return data;
   }
@@ -129,7 +120,6 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     method: "DELETE"
   })
   if (response.ok) {
-    // const data = await response.json();
     dispatch(deleteSpot(spotId));
     return response;
   }
@@ -143,13 +133,9 @@ const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       newState = {...state}
-      // console.log('state from inside reducer', state)
-      // console.log('action.spots from inside reducer', action.spots)
       action.spots.forEach(spot => {
-        // console.log('spot.id inside forEach loop', spot.id)
         newState[spot.id] = spot;
       });
-      // console.log('newState after forEach loop', newState)
       return newState;
     case READ:
       newState = {...state, [action.spot.id]: {...action.spot}};
@@ -168,11 +154,9 @@ const spotsReducer = (state = initialState, action) => {
       return newState;
     case DELETE:
       newState = {...state};
-      // console.log('action.spotId from spotsReducer', action.spotId)
       delete newState[action.spotId];
       return newState;
     case CREATE_PREVIEW_IMAGE:
-      // console.log('action.spotId', action.spotId);
       newState = {
         ...state,
         [action.spotId]: {
@@ -180,12 +164,6 @@ const spotsReducer = (state = initialState, action) => {
           previewImage: action.url
         }
       };
-
-
-      // console.log('action.spotId.previewImage', action.spotId.previewImage);
-      console.log('state[action.spotId]', state[action.spotId]);
-      console.log('action.url', action.url);
-      // console.log('newState', newState)
       return newState
     default:
       return state;

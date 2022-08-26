@@ -33,7 +33,9 @@ function AllSpots() {
                 </div>
                 <div className='allspots-city-state-ratings'>
                   <div style={{fontWeight: '600'}}>{spot.city}, {spot.state}</div>
-                  <div><i class="fa-solid fa-star" />{Number.parseFloat(spot.avgRating).toFixed(2)}</div>
+                  {isNaN(Number.parseFloat(spot.avgRating).toFixed(2)) && <div><i class="fa-solid fa-star" /></div>}
+                  {!isNaN(Number.parseFloat(spot.avgRating).toFixed(2)) && <div><i class="fa-solid fa-star" />{Number.parseFloat(spot.avgRating).toFixed(2)}</div>}
+                  {/* <div><i class="fa-solid fa-star" />{Number.parseFloat(spot.avgRating).toFixed(2)}</div> */}
                 </div>
                 <div className='allspots-name'>{spot.name}</div>
                 <div>$<span style={{'fontWeight':'600'}}>{spot.price} </span>night</div>
