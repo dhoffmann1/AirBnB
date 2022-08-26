@@ -46,20 +46,20 @@
 #header-details-container > #spot-sub-details {
   font-size: medium;
   display: flex;
-  justify-content: space-between;
-  width: 280px;
+  justify-content: flex-start;
+  /* margin: 5px; */
+  /* width: 320px; */
   /* max-width: 40%; */
 }
 
-/* #count-reviews, #city-state-info {
-  text-decoration: underline;
-} */
+.circle {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 #images-container {
   width: 100%;
-  /* width: 1000px; */
   display: grid;
-  /* grid-template-columns: 250px 250px 250px 250px; */
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 250px 250px;
   grid-template-areas:
