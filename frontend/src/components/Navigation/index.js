@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-import customLogo from './images/custom-logo.png';
+import customLogo from './images/pink-logo.jpg';
 import MainNavMenu from './MainNavMenu';
 import './Navigation.css';
 
@@ -18,14 +18,19 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <div id='greeting-message'>{`Hello, ${sessionUser.firstName} ${sessionUser.lastName}`}</div>
-        <NavLink exact to='/spots/current'><div id='become-a-host'>Become a Host</div></NavLink>
-        <ProfileButton user={sessionUser} />
+        <div id='become-a-host-and-dropdown-div'>
+          <NavLink id='become-a-host-navlink'exact to='/spots/current'><div id='become-a-host'>Become a Host</div></NavLink>
+          <ProfileButton user={sessionUser} />
+        </div>
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <MainNavMenu setShowLoginModal={setShowLoginModal} setShowSignupModal={setShowSignupModal}/>
+        <div id='become-a-host-and-dropdown-div'>
+          <NavLink id='become-a-host-navlink'exact to='/spots/current'><div id='become-a-host'>Become a Host</div></NavLink>
+          <MainNavMenu setShowLoginModal={setShowLoginModal} setShowSignupModal={setShowSignupModal}/>
+        </div>
       </>
     );
   }

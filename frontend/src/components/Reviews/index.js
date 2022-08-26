@@ -56,13 +56,14 @@ function ReviewsBySpotId({ spot }) {
             {reviewsArray.map((review, index) => {
               return (
                 <div key={review.id} id={`review-${index+1}`} className='single-review-container'>
-                  <div style={{ fontWeight: 'bold'}}>{review.User?.firstName} commented:</div>
+                  <div style={{ fontWeight: 'bold'}}><i class="fa-solid fa-circle-user"></i>{review.User?.firstName} commented:</div>
+                  <div id='review-dates'>{review.updatedAt.slice(0, 10)}</div>
                   <div>{review.review}</div>
                   {/* <div>{review.stars} stars</div> */}
                   {user?.id === review.userId &&
                     <div id='review-buttons-container'>
                       {/* <button id='edit-review-button'>Edit Comment</button> */}
-                      <button id='delete-review-button' onClick={() => deleteReviewFunc(review.id)}>Delete Comment</button>
+                      <div id='delete-review-button' onClick={() => deleteReviewFunc(review.id)}>Delete Comment</div>
                     </div>
                   }
                 </div>

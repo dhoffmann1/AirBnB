@@ -41,19 +41,25 @@ function CurrentUserSpots() {
 
   return (
     <main id='splash-container-current-user'>
-      <div id='title-banner-current-user'>Welcome {user?.firstName} To Your Spots Page</div>
+
       {userSpots.length === 0 &&
         (
-        <NavLink to={'/spots/create'}>
-          <button id='create-spot-button'>Create Your First Spot</button>
-        </NavLink>
+          <div id='title-banner-current-user-container'>
+            <div id='welcome-user-title-banner'>Welcome {user?.firstName} To Your Spots Page</div>
+            <NavLink id='create-spot-button' to={'/spots/create'}>
+              <div>Create Your First Spot</div>
+            </NavLink>
+          </div>
         )
       }
       {userSpots.length > 0 && (
         <>
-          <NavLink to={'/spots/create'}>
-            <button id='create-spot-button'>Create Another Spot</button>
-          </NavLink>
+          <div id='title-banner-current-user-container'>
+            <div id='welcome-user-title-banner'>Welcome {user?.firstName} To Your Spots Page</div>
+            <NavLink id='create-spot-button' to={'/spots/create'}>
+              <div>Create Another Spot</div>
+            </NavLink>
+          </div>
           <div id='splash-area-current-user'>
             {userSpots.map(spot => {
                 return (
@@ -70,8 +76,10 @@ function CurrentUserSpots() {
                         <div className='allspots-name'>{spot.name}</div>
                         <div>$<span style={{'fontWeight':'600'}}>{spot.price} </span>night</div>
                       </NavLink>
-                    <button id='update-spot-button' onClick={() => editSpotFunc(spot.id)}>edit</button>
-                    <button id='delete-spot-button' onClick={() => deleteSpotFunc(spot.id)}>delete</button>
+                    <div id='update-delete-spots-buttons-container'>
+                      <div id='update-spot-button' onClick={() => editSpotFunc(spot.id)}>Edit Spot</div>
+                      <div id='delete-spot-button' onClick={() => deleteSpotFunc(spot.id)}>Delete Spot</div>
+                    </div>
                     </div>
                 )
               })}

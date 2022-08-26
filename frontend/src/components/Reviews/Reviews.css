@@ -46,12 +46,18 @@
 }
 
 .single-review-container{
-  border: black 1px solid;
+  border: grey 1px solid;
   border-radius: 5px;
   padding: 5px;
   /* display: flex; */
   box-sizing: border-box;
   width: 100%;
+}
+
+#review-dates {
+  font-size: .9em;
+  color: grey;
+  margin-bottom: 5px;
 }
 
 #review-new-review-form-container {
@@ -63,13 +69,17 @@
 }
 
 .new-review-buttons {
-  background-color: rgb(255, 56, 92);
+  background-color: #FF385C;
   color: white;
   width: 380px;
   height: 40px;
   border-radius: 10px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.new-review-buttons:hover {
+  border: 3px black solid;
 }
 
 #reviews-form {
@@ -84,6 +94,11 @@
   min-width: 400px;
   min-height: 150px;
   border-radius: 10px;
+}
+
+#review-text-area:hover {
+  border: 3px black solid;
+  margin: -1px;
 }
 
 #review-stars-div {
@@ -102,6 +117,10 @@
   min-height: 40px;
 }
 
+#review-stars-menu:hover {
+  border: 2px black solid;
+}
+
 #review-submit-cancel-buttons-container {
   display: flex;
   flex-direction: column;
@@ -109,5 +128,21 @@
 }
 
 #review-submit-button {
-  background-color: green;
+  background-color: #FF385C;
+}
+
+#delete-review-button {
+  background-color: white;
+  border: 1px lightgrey solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+  width: 104px;
+  font-size: smaller;
+}
+
+#delete-review-button:hover {
+  border: 2px solid black;
+  margin: 1px;
 }

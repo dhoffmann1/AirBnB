@@ -8,26 +8,59 @@
   align-items: center;
 }
 
-#title-banner-current-user {
-  height: 40px;
+#title-banner-current-user-container {
+  height: 160px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* font-size: x-large; */
+  /* padding: 20px; */
+  background-image: linear-gradient(to right, rgb(255, 19, 70), rgb(200, 22, 105));
+  /* color: white; */
+  /* border-radius: 10px; */
+}
+
+#welcome-user-title-banner {
+  /* height: 40px; */
   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: x-large;
-  padding: 20px;
-  background-image: linear-gradient(to right, rgb(255, 19, 70), rgb(200, 22, 105));
+  padding: 10px;
+  margin: 5px;
+  /* box-sizing: border-box; */
+
+
+  /* background-image: linear-gradient(to right, rgb(255, 19, 70), rgb(200, 22, 105)); */
   color: white;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 #create-spot-button {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
   margin: 10px;
-  font-size: large;
+  /* box-sizing: border-box; */
+
+
+  font-size: medium;
   text-decoration: none;
+  color: black;
+  font-weight: 600;
+
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  background-color: white;
+}
+
+#create-spot-button:hover {
+  border: 2px solid black;
+  margin: 9px;
+
 }
 
 #splash-area-current-user {
@@ -35,6 +68,8 @@
   width: 80%;
   padding-left: 80px;
   padding-right: 80px;
+  margin-top: 10px;
+
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
@@ -78,4 +113,23 @@
 
 .allspots-name {
   color: grey;
+}
+
+#update-delete-spots-buttons-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#update-spot-button, #delete-spot-button {
+  background-color: white;
+  border: 1px lightgrey solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+#update-spot-button:hover, #delete-spot-button:hover {
+  border: 2px solid black;
+  margin: 1px;
 }
