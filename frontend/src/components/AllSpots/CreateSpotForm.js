@@ -25,10 +25,19 @@ function CreateSpotForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    let spot = { address, city, state, country, lat, lng, name, description, price };
+    let spot = { address, city, state, country, lat, lng, name, description, price: parseInt(price) };
     let allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
     if (!allowedImageExtensions.some(ext => imageUrl.slice(-5).toLowerCase().includes(ext))) {
       alert('Image Url must end in .jpg, .jpeg, .png, OR .gif')
+      return;
+    } else if (name.length < 3 || name.length > 30) {
+      alert('Name must be between 3 and 30 characters')
+      return;
+    } else if (price < 1) {
+      alert('Price must be greater than or equal to 1')
+      return;
+    } else if (description.length > 50) {
+      alert('Description must be equal to or under 50 characters')
       return;
     } else {
       dispatch(createSpot(spot))

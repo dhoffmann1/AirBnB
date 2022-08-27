@@ -7,13 +7,13 @@
 }
 
 #spot-main-area {
-  max-width: 1760px;
+  max-width: 1120px;
   width: 80%;
   padding-left: 80px;
   padding-right: 80px;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 100px 500px 120px 180px auto;
+  grid-template-rows: 100px auto 120px auto auto;
   grid-template-areas:
     "header"
     "images"
@@ -58,10 +58,13 @@
 }
 
 #images-container {
-  width: 100%;
+  /* width: 100%; */
+  /* max-width: 1120px; */
+  /* min-height: 300px; */
+  max-height: 450px;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: 250px 250px;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(2, 50%);
   grid-template-areas:
     "one one two three"
     "one one four five";
@@ -132,10 +135,15 @@
   grid-area: description;
   display: flex;
   width: 330px;
+  min-height: 120px;
   /* justify-content: center; */
   /* align-items: center; */
   font-size: large;
 
+}
+
+#description-info {
+  word-break: break-word;
 }
 
 #reviews-container {

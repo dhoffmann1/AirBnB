@@ -60,18 +60,17 @@
 #create-spot-button:hover {
   border: 2px solid black;
   margin: 9px;
-
 }
 
 #splash-area-current-user {
-  max-width: 1760px;
+  max-width: 1120px;
   width: 80%;
   padding-left: 80px;
   padding-right: 80px;
   margin-top: 10px;
 
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 25%);
   grid-template-rows: auto;
   column-gap: 15px;
   row-gap: 20px;
@@ -83,9 +82,10 @@
   width: 100%;
   height: 100%;
   /* padding: 15px; */
-  /* display: flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 
 .allspots-navLinks {
@@ -109,15 +109,18 @@
 .allspots-city-state-ratings {
   display: flex;
   justify-content: space-between;
+  width: 250px;
 }
 
 .allspots-name {
   color: grey;
+  width: 250px;
 }
 
 #update-delete-spots-buttons-container {
   display: flex;
   justify-content: space-around;
+  width: 250px;
 }
 
 #update-spot-button, #delete-spot-button {
@@ -132,4 +135,62 @@
 #update-spot-button:hover, #delete-spot-button:hover {
   border: 2px solid black;
   margin: 1px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1220px) {
+  #splash-area-current-user {
+    max-width: 1120px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  #splash-area-current-user {
+    max-width: 1120px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  #splash-area-current-user {
+    max-width: 1120px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
 }

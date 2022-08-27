@@ -29,16 +29,18 @@ function ReviewsBySpotId({ spot }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    setShowReviewField(false)
-    if (spot.ownerId === user.id) return alert(`${user.firstName}, you cannot leave a review for your own spot.`)
+    if (spot.ownerId === user.id) return alert(`${user.firstName}, you cannot leave a review for your own spot.`);
     if (reviewsArray.some(review => review.userId === user.id)) return alert(`${user.firstName}, you already have a review for this Spot.  Please see below.`);
-    return dispatch(createReviewForSpotThunk(spot.id, { review, stars: parseInt(stars) }))
+    if (review.length > 50) return alert('Review must be equal to or under 50 characters.')
+    setShowReviewField(false)
+    dispatch(createReviewForSpotThunk(spot.id, { review, stars: parseInt(stars) }))
       .catch(
         async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         }
-    )
+      )
+    return setReview('');
   };
 
   if (!reviewsArray) return null;
@@ -87,7 +89,6 @@ function ReviewsBySpotId({ spot }) {
             </div>
           )}
           {showReviewField && (
-            <div>
               <form id='reviews-form-new-with-errors-container' onSubmit={handleSubmit}>
                 <ul>
                 {errors.map((error, idx) => (
@@ -95,11 +96,14 @@ function ReviewsBySpotId({ spot }) {
                 ))}
                 </ul>
                 <div id='reviews-form'>
-                  <input
-                    type="textarea"
+                  <textarea
+                    type="text"
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
                     required
+                    rows="4"
+                    cols="20"
+                    wrap="hard"
                     placeholder="Type your review here"
                     id="review-text-area"
                   />
@@ -119,12 +123,13 @@ function ReviewsBySpotId({ spot }) {
                     </select>
                   </div>
                   <div id='review-submit-cancel-buttons-container'>
-                    <input id='review-submit-button' type='submit' value='Submit Review'  className='new-review-buttons' />
-                    <button id='review-cancel-submission' className='new-review-buttons' onClick={() => setShowReviewField(false)}>Nevermind</button>
+                    <input id='review-submit-button' type='submit' value='Submit Review' />
+                    <button id='review-cancel-submission' onClick={() => {
+                      setReview('')
+                      setShowReviewField(false)}}>Nevermind</button>
                   </div>
                 </div>
               </form>
-            </div>
           )}
         </div>
       }

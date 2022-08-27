@@ -24,7 +24,7 @@ function LoginForm({ setShowLoginModal }) {
 
   return (
     <form id='login-form' onSubmit={handleSubmit}>
-      <ul>
+      <ul className='error-messages-handling'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}

@@ -78,10 +78,10 @@ function CurrentUserSpots() {
                         <div className='allspots-name'>{spot.name}</div>
                         <div>$<span style={{'fontWeight':'600'}}>{spot.price} </span>night</div>
                       </NavLink>
-                    <div id='update-delete-spots-buttons-container'>
-                      <div id='update-spot-button' onClick={() => editSpotFunc(spot.id)}>Edit Spot</div>
-                      <div id='delete-spot-button' onClick={() => deleteSpotFunc(spot.id)}>Delete Spot</div>
-                    </div>
+                      <div id='update-delete-spots-buttons-container'>
+                        <div id='update-spot-button' onClick={() => editSpotFunc(spot.id)}>Edit Spot</div>
+                        <div id='delete-spot-button' onClick={() => deleteSpotFunc(spot.id)}>Delete Spot</div>
+                      </div>
                     </div>
                 )
               })}

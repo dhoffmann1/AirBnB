@@ -7,12 +7,12 @@
 }
 
 #splash-area {
-  max-width: 1760px;
+  max-width: 1120px;
   width: 80%;
   padding-left: 80px;
   padding-right: 80px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   /* grid-template-areas:
     "main main main main"
@@ -28,9 +28,10 @@
   width: 100%;
   height: 100%;
   /* padding: 15px; */
-  /* display: flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 
 .allspots-navLinks {
@@ -70,7 +71,7 @@
 }
 
 /* Media Queries */
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1220px) {
   #splash-area {
     max-width: 1760px;
     width: 80%;

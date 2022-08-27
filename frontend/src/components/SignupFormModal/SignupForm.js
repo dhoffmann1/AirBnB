@@ -33,7 +33,7 @@ function SignupFormPage({ setShowSignupModal }) {
 
   return (
     <form id='signup-form' onSubmit={handleSubmit}>
-      <ul>
+      <ul className='error-messages-handling'>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <div id='welcome-title-signup'>Welcome to Airbnb-Prime</div>
