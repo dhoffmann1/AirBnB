@@ -50,8 +50,8 @@
 } */
 
 .allspots-images {
-  width: 100%;
-  height: 260px;
+  width: 250px;
+  height: 250px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -61,8 +61,68 @@
 .allspots-city-state-ratings {
   display: flex;
   justify-content: space-between;
+  width: 250px;
 }
 
 .allspots-name {
   color: grey;
+  width: 250px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1250px) {
+  #splash-area {
+    max-width: 1760px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  #splash-area {
+    max-width: 1760px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  #splash-area {
+    max-width: 1760px;
+    width: 80%;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+    /* grid-template-areas:
+      "main main main main"
+      "main main main main"
+      "main main main main"; */
+    column-gap: 15px;
+    row-gap: 20px;
+    justify-items: center;
+  }
 }
