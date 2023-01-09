@@ -1,11 +1,21 @@
 // backend/routes/api/spots.js
 const express = require('express');
+const multer = require('multer');
 const { Op } = require('sequelize');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { User, Spot, Booking, Image, Review, sequelize } = require('../../db/models');
+const { s3Uploadv2 } = require('../../s3Service');
 const router = express.Router();
+
+
+//Set up AWS for image uploads
+// AWS.config.update({
+//   accessKeyId: 'AKIARAYNASBUC4AYFNPM',
+//   secretAccessKey: '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',
+// });
+
 
 // Get All Spots
 router.get('/', async (req, res) => {
@@ -182,6 +192,24 @@ router.post('/', restoreUser, async (req, res) => {
 
   res.status(201).json(result);
 })
+
+
+// Send a request to upload images to AWS
+const storage = multer.memoryStorage();
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split("/")[0] === "image") {
+    cb(null, true);
+  } else {
+    cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false);
+  }
+};
+
+const upload = multer({ storage, fileFilter });
+router.post('/upload', upload.single("file"), async (req, res) => {
+  const result = await s3Uploadv2(req.file).then(res1 => res1.Location)
+  return res.json(result)
+});
 
 // Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', restoreUser, async (req, res) => {

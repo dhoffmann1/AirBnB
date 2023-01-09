@@ -1,10 +1,12 @@
 // Import packages
 const express = require('express');
 require('express-async-errors');
+require('dotenv').config();
 const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
 
@@ -18,9 +20,11 @@ const isProduction = environment === 'production';
 // Initialize Express app
 const app = express();
 
-// Connect morgan, cookie-parser, .json middleware
+// Connect morgan, cookie-parser, bodyParser, .json middleware
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 
 // Security Middleware

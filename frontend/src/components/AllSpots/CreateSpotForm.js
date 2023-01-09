@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addPreviewImage, createSpot } from '../../store/spots'
+import { csrfFetch } from '../../store/csrf';
 import './CreateSpotForm.css'
 
 function CreateSpotForm() {
@@ -19,29 +20,23 @@ function CreateSpotForm() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState();
-  const [imageUrl, setImageUrl] = useState('');
+  const [image, setImage] = useState('');
   const [errors, setErrors] = useState([])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
     let spot = { address, city, state, country, lat, lng, name, description, price: parseInt(price) };
-    let allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
-    if (!allowedImageExtensions.some(ext => imageUrl.slice(-5).toLowerCase().includes(ext))) {
-      alert('Image Url must end in .jpg, .jpeg, .png, OR .gif')
-      return;
-    } else if (name.length < 3 || name.length > 30) {
-      alert('Name must be between 3 and 30 characters')
-      return;
-    } else if (price < 1) {
-      alert('Price must be greater than or equal to 1')
-      return;
-    } else if (description.length > 50) {
-      alert('Description must be equal to or under 50 characters')
-      return;
-    } else {
+    // let allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+    // if (!allowedImageExtensions.some(ext => imageUrl.slice(-5).toLowerCase().includes(ext))) {
+    //   alert('Image Url must end in .jpg, .jpeg, .png, OR .gif')
+    // if (image.type.slice(0, 5) !== "image") return alert('Could not create image.  File type must be image.')
+    if (name.length < 3 || name.length > 30) return alert('Name must be between 3 and 30 characters')
+    else if (price < 1) return alert('Price must be greater than or equal to 1')
+    else if (description.length > 50) return alert('Description must be equal to or under 50 characters')
+    else {
       dispatch(createSpot(spot))
-        .then(spot => dispatch(addPreviewImage(spot.id, imageUrl)))
+        .then(spot => dispatch(addPreviewImage(spot.id, image)))
         .catch(
           async (res) => {
             const data = await res.json();
@@ -51,6 +46,24 @@ function CreateSpotForm() {
     }
     return history.push('/spots/current');
   };
+
+  const updateImage = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const createAWS = await csrfFetch('/api/spots/upload', {
+      method: 'POST',
+      body: formData
+    })
+
+    if (createAWS.ok) {
+      await createAWS.json().then(result => {
+        setImage(result)
+        return result
+      });
+    }
+  }
 
   return (
     <div id='create-spot-form-container'>
@@ -124,7 +137,7 @@ function CreateSpotForm() {
               className="label-input-fields-create-spot"
             />
           </label>
-          <label>
+          {/* <label>
             <input
               type="text"
               value={imageUrl}
@@ -132,6 +145,14 @@ function CreateSpotForm() {
               required
               placeholder="Preview Image Url"
               className="label-input-fields-create-spot"
+            />
+          </label> */}
+          <label>
+            <input
+              type="file"
+              name="file"
+              accept="image/*"
+              onChange={updateImage}
             />
           </label>
           <label>
@@ -161,7 +182,7 @@ function CreateSpotForm() {
             setName('Casa Blanca');
             setDescription('Historical site with a nice garden.');
             setPrice(20000);
-            setImageUrl('https://www.whitehouse.gov/wp-content/uploads/2021/01/about_the_white_house.jpg')
+            setImage('https://www.whitehouse.gov/wp-content/uploads/2021/01/about_the_white_house.jpg')
           }}>Create Demo Spot</button>
         </div>
       </form>
