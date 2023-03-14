@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pepa90210/AirBnB.git"
+    "url": "git+https://github.com/dhoffmann1/AirBnB.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Pepa90210/AirBnB/issues"
+    "url": "https://github.com/dhoffmann1/AirBnB/issues"
   },
-  "homepage": "https://github.com/Pepa90210/AirBnB#readme"
+  "homepage": "https://github.com/dhoffmann1/AirBnB#readme"
 }
